@@ -71,7 +71,7 @@ public class SpaceShip : MonoBehaviour
         //Strafing
         if(strafeB >0.1f || strafeB <-0.1f)
         {
-            rb.AddRelativeForce(Vector3.right * strafeB * strafeThrust * Time.fixedDeltaTime);
+            rb.AddRelativeTorque(Vector3.up * strafeB * strafeThrust * Time.fixedDeltaTime);
             
         }
         
