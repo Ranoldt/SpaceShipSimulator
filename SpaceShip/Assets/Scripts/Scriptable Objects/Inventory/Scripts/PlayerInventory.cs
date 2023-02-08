@@ -43,9 +43,8 @@ public class PlayerInventory : MonoBehaviour
         if (item)
         {
             inventory.addItem(item.item, 1);
+            Destroy(other.gameObject);
         }
-
-        Destroy(other.gameObject);
     }
 
     private void OnApplicationQuit()

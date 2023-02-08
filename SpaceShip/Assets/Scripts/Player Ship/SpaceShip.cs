@@ -8,6 +8,9 @@ using UnityEngine.InputSystem.Interactions;
 public class SpaceShip : MonoBehaviour
 {
     [SerializeField]
+    private GameObject inv;
+
+    [SerializeField]
     private float yawTorque;
     [SerializeField]
     private float pitchTorque;
@@ -28,6 +31,7 @@ public class SpaceShip : MonoBehaviour
     private float strafeB;
     private float rollB;
     private Vector2 pitchYaw;
+    private bool InvToggle = false;
 
 
     // Start is called before the first frame update
@@ -103,5 +107,18 @@ public class SpaceShip : MonoBehaviour
     public void OnPitchYaw(InputAction.CallbackContext context)
     {
         pitchYaw = context.ReadValue<Vector2>();
+    }
+
+    public void OnInvToggle(InputAction.CallbackContext context)
+    {
+        InvToggle = !InvToggle;
+
+        if (InvToggle){
+            inv.SetActive(true);
+        }
+        else
+        {
+            inv.SetActive(false);
+        }
     }
 }

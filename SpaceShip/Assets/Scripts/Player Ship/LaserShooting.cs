@@ -21,6 +21,9 @@ public class LaserShooting : MonoBehaviour
     private ParticleSystem laserHitParticles;
     [SerializeField]
     private float miningPower = 1f;
+    public float _miningPower { get { return miningPower; } private set { _miningPower = value; } }
+
+
     [SerializeField]
     private float laserHeatThreshold = 2f;
     [SerializeField]
@@ -76,6 +79,11 @@ public class LaserShooting : MonoBehaviour
 
         if(TargetInfo.IsTargetInRange(OriginMiddle.transform.position,OriginMiddle.transform.forward, out Hitinfo, laserRange, shootingMask))
         {
+            IShootable target = Hitinfo.transform.GetComponent<IShootable>();
+            if(target != null)
+            {
+                target.damage(miningPower);
+            }
             Instantiate(laserHitParticles, Hitinfo.point, Quaternion.LookRotation(Hitinfo.normal));
 
             foreach(var laser in lasers)
