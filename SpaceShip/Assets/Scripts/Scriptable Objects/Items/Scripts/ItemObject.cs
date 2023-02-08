@@ -14,6 +14,7 @@ public class ItemObject : ScriptableObject
 {
     public Sprite icon;
     public ItemType type;
+    public int sellAmount;
     [TextArea(15, 20)]
     public string description;
 

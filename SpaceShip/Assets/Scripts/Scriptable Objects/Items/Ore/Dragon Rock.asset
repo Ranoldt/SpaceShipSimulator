@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dea9d89a4de728d4a869e3ab2e7ca599, type: 3}
   m_Name: Dragon Rock
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  icon: {fileID: 21300000, guid: d3d9bfde9b0571f4bbf7210725c77e10, type: 3}
   type: 0
+  sellAmount: 69
   description: A rock that looks like a dragon

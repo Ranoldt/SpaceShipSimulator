@@ -42,6 +42,7 @@ public class PlayerInventory : MonoBehaviour
 
         if (item)
         {
+            other.GetComponent<Collider>().enabled = false; //deal with double counting by making sure on trigger enter only happens once
             inventory.addItem(item.item, 1);
             Destroy(other.gameObject);
         }

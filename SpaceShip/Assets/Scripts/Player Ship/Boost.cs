@@ -53,14 +53,13 @@ public class Boost : MonoBehaviour
 
     private void UpdateUI()
     {
-        boostBar.value = boostLeft / boostTime;
+        boostBar.value = boostLeft / boostTime; //value made as a percentage so you dont have to adjust the values every time boostTime changes
     }
 
     private void BoostMove()
     {
         if(boost && boostLeft > 0)
         {
-            Debug.Log("boosting");
             rb.AddRelativeForce(Vector3.forward * boostStrength * Time.deltaTime);
             boostLeft -= Time.fixedDeltaTime;
         }

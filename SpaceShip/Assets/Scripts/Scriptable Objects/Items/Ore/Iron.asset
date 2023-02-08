@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: fa5e0f99076743e4eb70805f43b3aaee, type: 3}
   type: 0
+  sellAmount: 10
   description: I run for some Iron

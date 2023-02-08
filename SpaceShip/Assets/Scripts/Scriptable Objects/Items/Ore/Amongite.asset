@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dea9d89a4de728d4a869e3ab2e7ca599, type: 3}
   m_Name: Amongite
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  icon: {fileID: 21300000, guid: 3fd3c559b64c4274fba66ee780de6ad9, type: 3}
   type: 0
+  sellAmount: 300
   description: So sus but so valuable
