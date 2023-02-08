@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
 
 [RequireComponent(typeof(Rigidbody))]
 public class SpaceShip : MonoBehaviour
@@ -28,6 +29,8 @@ public class SpaceShip : MonoBehaviour
     private float rollB;
     private Vector2 pitchYaw;
 
+    private bool shouldMove = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,7 +40,10 @@ public class SpaceShip : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Movement();
+        if (shouldMove)
+        {
+            Movement();
+        }
     }
 
     void Movement()
@@ -71,7 +77,7 @@ public class SpaceShip : MonoBehaviour
         //Strafing
         if(strafeB >0.1f || strafeB <-0.1f)
         {
-            rb.AddRelativeTorque(Vector3.forward * -strafeB * strafeThrust * Time.fixedDeltaTime);
+            rb.AddRelativeTorque(Vector3.up * -strafeB * strafeThrust * Time.fixedDeltaTime);
             
         }
         
@@ -101,5 +107,30 @@ public class SpaceShip : MonoBehaviour
     public void OnPitchYaw(InputAction.CallbackContext context)
     {
         pitchYaw = context.ReadValue<Vector2>();
+    }
+    public void onBoost(InputAction.CallbackContext context)
+    {
+        var toggle = context.interaction;
+
+        if (context.performed)
+        {
+            if (toggle is TapInteraction)
+            {
+                Debug.Log("you need to start moving or stop moving");
+                shouldMove = !shouldMove;
+            }
+
+            else if(toggle is HoldInteraction)
+            {
+                Debug.Log("Boosting now");
+            }
+        }
+        else if (context.canceled)
+        {
+            if(toggle is HoldInteraction)
+            {
+                Debug.Log("End Boost");
+            }
+        }
     }
 }
