@@ -228,7 +228,7 @@
                     "name": "",
                     "id": "d4a597e9-eae8-45a9-974f-b9f0bad6f40f",
                     "path": "<Keyboard>/leftShift",
-                    "interactions": "Hold(duration=0.3),Tap",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Boost",

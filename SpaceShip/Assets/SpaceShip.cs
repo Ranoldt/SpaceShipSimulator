@@ -8,18 +8,18 @@ using UnityEngine.InputSystem.Interactions;
 public class SpaceShip : MonoBehaviour
 {
     [SerializeField]
-    private float yawTorque = 500f;
+    private float yawTorque;
     [SerializeField]
-    private float pitchTorque = 1000f;
+    private float pitchTorque;
     [SerializeField]
-    private float rollTorque = 1000f;
+    private float rollTorque;
     [SerializeField]
-    private float thrust = 100f;
+    private float thrust;
     [SerializeField]
-    private float upThrust = 50f;
+    private float upThrust;
     [SerializeField]
-    private float strafeThrust = 50f;
-    
+    private float strafeThrust;
+
 
     Rigidbody rb;
 
@@ -29,7 +29,6 @@ public class SpaceShip : MonoBehaviour
     private float rollB;
     private Vector2 pitchYaw;
 
-    private bool shouldMove = false;
 
     // Start is called before the first frame update
     void Start()
@@ -40,10 +39,7 @@ public class SpaceShip : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (shouldMove)
-        {
-            Movement();
-        }
+        Movement();
     }
 
     void Movement()
@@ -60,9 +56,9 @@ public class SpaceShip : MonoBehaviour
         if (thrustB > 0.1f || thrustB < -0.1f)
         {
             float currentThrust = thrust;
-
-            rb.AddRelativeForce(Vector3.forward * thrustB * currentThrust * Time.deltaTime);
             
+            rb.AddRelativeForce(Vector3.forward * thrustB * currentThrust * Time.deltaTime);
+
         }
         
 
@@ -77,7 +73,7 @@ public class SpaceShip : MonoBehaviour
         //Strafing
         if(strafeB >0.1f || strafeB <-0.1f)
         {
-            rb.AddRelativeTorque(Vector3.up * -strafeB * strafeThrust * Time.fixedDeltaTime);
+            rb.AddRelativeTorque(Vector3.up * strafeB * strafeThrust * Time.fixedDeltaTime);
             
         }
         
@@ -107,30 +103,5 @@ public class SpaceShip : MonoBehaviour
     public void OnPitchYaw(InputAction.CallbackContext context)
     {
         pitchYaw = context.ReadValue<Vector2>();
-    }
-    public void onBoost(InputAction.CallbackContext context)
-    {
-        var toggle = context.interaction;
-
-        if (context.performed)
-        {
-            if (toggle is TapInteraction)
-            {
-                Debug.Log("you need to start moving or stop moving");
-                shouldMove = !shouldMove;
-            }
-
-            else if(toggle is HoldInteraction)
-            {
-                Debug.Log("Boosting now");
-            }
-        }
-        else if (context.canceled)
-        {
-            if(toggle is HoldInteraction)
-            {
-                Debug.Log("End Boost");
-            }
-        }
     }
 }
