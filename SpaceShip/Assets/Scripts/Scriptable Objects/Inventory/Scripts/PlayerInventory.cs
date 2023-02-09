@@ -2,11 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerInventory : MonoBehaviour
 {
     [SerializeField]
     Transform itemParent;
+    [SerializeField]
+    private TMP_Text money;
 
 
     private Slot[] slots;
@@ -29,6 +32,8 @@ public class PlayerInventory : MonoBehaviour
             inventory.Container.RemoveAt(i);
             slots[i].ClearSlot();
         }
+
+        money.text = "$" + inventory.currentCash.ToString(); //update ui
 
     }
     private void UpdateUI()

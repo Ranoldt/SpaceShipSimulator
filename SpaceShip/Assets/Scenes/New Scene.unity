@@ -1945,6 +1945,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 110033960}
     - target: {fileID: 1169575989217025174, guid: d8d46c4d9fc75b846a7485d3b4bd1b47, type: 3}
+      propertyPath: money
+      value: 
+      objectReference: {fileID: 1888734773}
+    - target: {fileID: 1169575989217025174, guid: d8d46c4d9fc75b846a7485d3b4bd1b47, type: 3}
       propertyPath: itemParent
       value: 
       objectReference: {fileID: 1719890595}
