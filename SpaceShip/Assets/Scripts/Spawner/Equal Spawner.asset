@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 081b332ca020d974b911bfd3bf5f2eaf, type: 3}
+  m_Name: Equal Spawner
+  m_EditorClassIdentifier: 
+  spawnerRadius: 100
+  maxEntities: 100
+  AsterTable:
+  - _asteroid: {fileID: 7131879691495988418, guid: 578aff86adb1c624da2e8d9479d54c19, type: 3}
+    dropChance: 0.2
+  - _asteroid: {fileID: 7131879691495988418, guid: aecd3840223737a438fb17dbdaf89880, type: 3}
+    dropChance: 0.2
+  - _asteroid: {fileID: 7131879691495988418, guid: 64eea9f167949c04bb1f7e95d264c976, type: 3}
+    dropChance: 0.2
+  - _asteroid: {fileID: 7131879691495988418, guid: 5d6fb9c9dc938a8448e93d158fede1ec, type: 3}
+    dropChance: 0.2
+  - _asteroid: {fileID: 7131879691495988418, guid: d84f8f28efe289d4f894e76e9a88c86e, type: 3}
+    dropChance: 0.2

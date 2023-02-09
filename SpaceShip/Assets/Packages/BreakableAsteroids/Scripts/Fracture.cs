@@ -43,7 +43,7 @@ public class Fracture : MonoBehaviour, IShootable
     {
         for(int i = 0; i< AsteroidData.lootable.Length; i++)
         {
-            randomization = UnityEngine.Random.Range(0, 1);
+            randomization = UnityEngine.Random.Range(0f, 1f);
 
 
             if (randomization <= AsteroidData.lootable[i].dropChance)
