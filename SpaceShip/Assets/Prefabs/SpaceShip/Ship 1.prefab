@@ -885,6 +885,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a672683bc32f46a4f82e13e08120c45f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventory: {fileID: 11400000, guid: 0ec0012b9fa22a048a3cf80630914ee4, type: 2}
+  costText: {fileID: 0}
   LaserOrigin:
   - {fileID: 1169575987973428544}
   - {fileID: 1169575989117108701}

@@ -9,6 +9,8 @@ public class MotherShip : MonoBehaviour
     private TMP_Text text;
     [SerializeField]
     private GameObject sellMenu;
+    [SerializeField]
+    private GameObject UI;
 
     bool isMenu  = false;
 
@@ -18,6 +20,7 @@ public class MotherShip : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.E) && text.isActiveAndEnabled)
         {
             sellMenu.SetActive(true);
+            UI.SetActive(false);
             isMenu = true;
         }
 
@@ -25,6 +28,7 @@ public class MotherShip : MonoBehaviour
         {
             isMenu = false;
             sellMenu.SetActive(false);
+            UI.SetActive(true);
         }
     }
 

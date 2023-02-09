@@ -2,9 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class LaserShooting : MonoBehaviour
 {
+    //variables for levelling mining power
+    private int laserLevel;
+    private float totalPower;
+    private int cost;
+
+    [SerializeField]
+    InventoryObject inventory;
+    [SerializeField]
+    private TMP_Text costText;
+
+
     [SerializeField]
     private Transform[] LaserOrigin;
     [SerializeField]
@@ -47,12 +59,27 @@ public class LaserShooting : MonoBehaviour
     private void Awake()
     {
         playercamera = Camera.main;
+        totalPower = miningPower; //variable initialization
+        cost = 1000;
+        costText.text = "Cost: $" + cost.ToString();
     }
 
     private void Update()
     {
         LaserFiring();
         
+    }
+
+    public void LevelUpLaser()
+    {
+        if (inventory.currentCash > cost)
+        {
+            inventory.currentCash -= cost;
+            laserLevel += 1;
+            totalPower = miningPower + (1.5f * laserLevel);
+            cost = ((int)Mathf.Round(cost * 1.5f));
+            costText.text = "Cost: $" + cost.ToString();
+        }
     }
 
     private void LaserFiring()
@@ -82,7 +109,7 @@ public class LaserShooting : MonoBehaviour
             IShootable target = Hitinfo.transform.GetComponent<IShootable>();
             if(target != null)
             {
-                target.damage(miningPower);
+                target.damage(totalPower);
             }
             Instantiate(laserHitParticles, Hitinfo.point, Quaternion.LookRotation(Hitinfo.normal));
 
