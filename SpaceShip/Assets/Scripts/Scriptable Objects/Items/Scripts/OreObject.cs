@@ -7,5 +7,6 @@ public class OreObject : ItemObject
     private void Awake()
     {
         type = ItemType.ore;
+
     }
 }

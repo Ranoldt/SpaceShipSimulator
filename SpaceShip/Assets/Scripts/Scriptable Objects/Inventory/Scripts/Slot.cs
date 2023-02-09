@@ -27,9 +27,10 @@ public class Slot : MonoBehaviour
     public void ClearSlot()
     {
         item = null;
+        text.text = 0.ToString();
 
         icon.sprite = null;
-        icon.enabled = false;
+        //icon.enabled = false;
     }
 
 }

@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Player1
   m_EditorClassIdentifier: 
   Container: []
+  currentCash: 0

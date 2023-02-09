@@ -7,8 +7,11 @@ public class InventoryObject : ScriptableObject
 {
     public List<InventorySlot> Container = new List<InventorySlot>();
 
+    public int currentCash;
+
     public delegate void OnItemChanged();
     public OnItemChanged OnItemChangedCallback;
+
     public void addItem(ItemObject _item, int _amount)
     {
         //check if you have item in inv
@@ -33,6 +36,7 @@ public class InventoryObject : ScriptableObject
                 OnItemChangedCallback.Invoke();
         }
     }
+
 }
 [System.Serializable]
 public class InventorySlot

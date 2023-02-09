@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1169575987884333471}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Middle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1169575987973428544}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Origin 01
   m_TagString: Untagged
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
@@ -73,7 +73,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1169575988042333661}
   - component: {fileID: 1169575988042333660}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: laser
   m_TagString: Laser
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1169575988103885477}
   - component: {fileID: 1169575988103885476}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RightTrail
   m_TagString: Untagged
   m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
@@ -344,7 +344,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1169575988442039488}
   - component: {fileID: 1169575988442039491}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LeftTrail
   m_TagString: Untagged
   m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
@@ -484,7 +484,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1169575988709166022}
   - component: {fileID: 1169575988709166017}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: laser
   m_TagString: Laser
   m_Icon: {fileID: 0}
@@ -614,7 +614,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1169575989117108701}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Origin 02
   m_TagString: Untagged
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
@@ -653,7 +653,7 @@ GameObject:
   - component: {fileID: 1169575989217025175}
   - component: {fileID: 1169575989217025174}
   - component: {fileID: 1169575989217025169}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ship 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -694,12 +694,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inv: {fileID: 0}
-  yawTorque: 60
-  pitchTorque: 60
+  yawTorque: 100
+  pitchTorque: 200
   rollTorque: 100
   thrust: 500
   upThrust: 500
-  strafeThrust: 60
+  strafeThrust: 300
 --- !u!54 &1169575989217025163
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -956,7 +956,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1169575989451683831}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LaserOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -990,7 +990,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1169575989690161315}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LookTarget
   m_TagString: Untagged
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
@@ -1021,7 +1021,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1169575989718979448}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ShipGraphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1139,7 +1139,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &2432374447229213174
@@ -1158,7 +1158,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7640513846327341240
 Transform:
   m_ObjectHideFlags: 0
@@ -1182,7 +1182,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2432374447229213174}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 7.94
@@ -1269,9 +1269,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1169575989718979448}
     m_Modifications:
+    - target: {fileID: 1220665626837880, guid: 73b09e5094ff94fddac6945d623c08af, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1993769037395402, guid: 73b09e5094ff94fddac6945d623c08af, type: 3}
       propertyPath: m_Name
       value: BlueBull
+      objectReference: {fileID: 0}
+    - target: {fileID: 1993769037395402, guid: 73b09e5094ff94fddac6945d623c08af, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4820260890093242, guid: 73b09e5094ff94fddac6945d623c08af, type: 3}
       propertyPath: m_RootOrder

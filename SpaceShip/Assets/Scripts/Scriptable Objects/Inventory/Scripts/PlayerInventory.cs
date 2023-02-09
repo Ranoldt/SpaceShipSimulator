@@ -18,14 +18,19 @@ public class PlayerInventory : MonoBehaviour
         inventory.OnItemChangedCallback += UpdateUI;
 
         slots = itemParent.GetComponentsInChildren<Slot>();
-        //CreateUI();
     }
 
-    //private void CreateUI()
-    //{
-        
-    //}
+    public void sellItems()
+    {
+        for (int i = inventory.Container.Count-1; i >= 0; i--)
+        {
+            int stackPrice = inventory.Container[i].item.SellAmount * inventory.Container[i].amount;
+            inventory.currentCash += stackPrice;
+            inventory.Container.RemoveAt(i);
+            slots[i].ClearSlot();
+        }
 
+    }
     private void UpdateUI()
     {
         slots = itemParent.GetComponentsInChildren<Slot>();
@@ -51,5 +56,6 @@ public class PlayerInventory : MonoBehaviour
     private void OnApplicationQuit()
     {
         inventory.Container.Clear();
+        inventory.currentCash = 0;
     }
 }
