@@ -72,7 +72,7 @@ public class LaserShooting : MonoBehaviour
 
     public void LevelUpLaser()
     {
-        if (inventory.currentCash > cost)
+        if (inventory.currentCash >= cost)
         {
             inventory.currentCash -= cost;
             laserLevel += 1;

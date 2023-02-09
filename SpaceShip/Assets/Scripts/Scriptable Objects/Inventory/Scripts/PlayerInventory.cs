@@ -23,6 +23,10 @@ public class PlayerInventory : MonoBehaviour
         slots = itemParent.GetComponentsInChildren<Slot>();
     }
 
+    private void Update()
+    {
+        money.text = "$" + inventory.currentCash.ToString(); //update ui
+    }
     public void sellItems()
     {
         for (int i = inventory.Container.Count-1; i >= 0; i--)
@@ -32,8 +36,6 @@ public class PlayerInventory : MonoBehaviour
             inventory.Container.RemoveAt(i);
             slots[i].ClearSlot();
         }
-
-        money.text = "$" + inventory.currentCash.ToString(); //update ui
 
     }
     private void UpdateUI()
