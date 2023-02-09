@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da1998b7e739b9a43b028424509facb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifespan: 10
   item: {fileID: 11400000, guid: d0ec277629dc7f8418070bb0b82f09e8, type: 2}
 --- !u!108 &8350045053863147450
 Light:
