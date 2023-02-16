@@ -411,7 +411,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 73.64
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -2859,6 +2859,10 @@ PrefabInstance:
       propertyPath: inv
       value: 
       objectReference: {fileID: 110033960}
+    - target: {fileID: 1169575989217025162, guid: d8d46c4d9fc75b846a7485d3b4bd1b47, type: 3}
+      propertyPath: shipdata
+      value: 
+      objectReference: {fileID: 11400000, guid: 2e3f4712a33b93840aae40bc0034f3b8, type: 2}
     - target: {fileID: 1169575989217025172, guid: d8d46c4d9fc75b846a7485d3b4bd1b47, type: 3}
       propertyPath: costText
       value: 
@@ -2875,6 +2879,10 @@ PrefabInstance:
       propertyPath: boostBar
       value: 
       objectReference: {fileID: 1800989592}
+    - target: {fileID: 1169575989217025175, guid: d8d46c4d9fc75b846a7485d3b4bd1b47, type: 3}
+      propertyPath: boostdata
+      value: 
+      objectReference: {fileID: 11400000, guid: 60153f98d1ddbdd4f889358a7349db6d, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8d46c4d9fc75b846a7485d3b4bd1b47, type: 3}
 --- !u!1 &1741023621
@@ -3157,7 +3165,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 4152525}
   m_Lens:
-    FieldOfView: 60
+    FieldOfView: 73.64
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000

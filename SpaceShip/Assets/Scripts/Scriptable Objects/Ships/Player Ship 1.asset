@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9e61d1b30123d943adf8f5e38014ccd, type: 3}
+  m_Name: Player Ship 1
+  m_EditorClassIdentifier: 
+  yawTorque: 100
+  pitchTorque: 200
+  rollTorque: 100
+  thrust: 500
+  upThrust: 500
+  strafeThrust: 300
+  inv: {fileID: 11400000, guid: 0ec0012b9fa22a048a3cf80630914ee4, type: 2}
+  mininglaser: {fileID: 0}
+  miningLevel: 1
+  boostLevel: 1
+  moveLevel: 1

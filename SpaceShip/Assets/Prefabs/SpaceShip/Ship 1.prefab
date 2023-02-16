@@ -693,12 +693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inv: {fileID: 0}
-  yawTorque: 100
-  pitchTorque: 200
-  rollTorque: 100
-  thrust: 500
-  upThrust: 500
-  strafeThrust: 300
+  shipdata: {fileID: 11400000, guid: 2e3f4712a33b93840aae40bc0034f3b8, type: 2}
 --- !u!54 &1169575989217025163
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -915,11 +910,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43a0a3b6bf6ec694da1f082ac8d63a54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boostStrength: 1000
-  boostRecoveryRate: 2
-  boostRecoveryInterval: 3
+  boostdata: {fileID: 11400000, guid: 60153f98d1ddbdd4f889358a7349db6d, type: 2}
   boostBar: {fileID: 0}
-  boostTime: 10
 --- !u!114 &1169575989217025174
 MonoBehaviour:
   m_ObjectHideFlags: 0

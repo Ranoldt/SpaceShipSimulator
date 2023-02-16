@@ -11,17 +11,7 @@ public class SpaceShip : MonoBehaviour
     private GameObject inv;
 
     [SerializeField]
-    private float yawTorque;
-    [SerializeField]
-    private float pitchTorque;
-    [SerializeField]
-    private float rollTorque;
-    [SerializeField]
-    private float thrust;
-    [SerializeField]
-    private float upThrust;
-    [SerializeField]
-    private float strafeThrust;
+    private ShipObject shipdata;
 
 
     Rigidbody rb;
@@ -49,17 +39,17 @@ public class SpaceShip : MonoBehaviour
     void Movement()
     {
        //Roll
-        rb.AddRelativeTorque(Vector3.back * rollB * rollTorque * Time.deltaTime);
+        rb.AddRelativeTorque(Vector3.back * rollB * shipdata.rollTorque * Time.deltaTime);
         //pitch
-        rb.AddRelativeTorque(Vector3.right * Mathf.Clamp(-pitchYaw.y,-1f,1f) * pitchTorque * Time.deltaTime);
+        rb.AddRelativeTorque(Vector3.right * Mathf.Clamp(-pitchYaw.y,-1f,1f) * shipdata.pitchTorque * Time.deltaTime);
         //Yaw
-        rb.AddRelativeTorque(Vector3.up * Mathf.Clamp(pitchYaw.x,-1f,1f) * yawTorque * Time.deltaTime);
+        rb.AddRelativeTorque(Vector3.up * Mathf.Clamp(pitchYaw.x,-1f,1f) * shipdata.yawTorque * Time.deltaTime);
        
 
         //Thurst
         if (thrustB > 0.1f || thrustB < -0.1f)
         {
-            float currentThrust = thrust;
+            float currentThrust = shipdata.thrust;
             
             rb.AddRelativeForce(Vector3.forward * thrustB * currentThrust * Time.deltaTime);
 
@@ -69,7 +59,7 @@ public class SpaceShip : MonoBehaviour
         //UpDown
         if (upDownB > 0.1f || upDownB < -0.1f)
         {
-            rb.AddRelativeForce(Vector3.up * upDownB * upThrust * Time.fixedDeltaTime);
+            rb.AddRelativeForce(Vector3.up * upDownB * shipdata.upThrust * Time.fixedDeltaTime);
             
         }
         
@@ -77,7 +67,7 @@ public class SpaceShip : MonoBehaviour
         //Strafing
         if(strafeB >0.1f || strafeB <-0.1f)
         {
-            rb.AddRelativeTorque(Vector3.up * strafeB * strafeThrust * Time.fixedDeltaTime);
+            rb.AddRelativeTorque(Vector3.up * strafeB * shipdata.strafeThrust * Time.fixedDeltaTime);
             
         }
         
@@ -114,7 +104,7 @@ public class SpaceShip : MonoBehaviour
         InvToggle = !InvToggle;
 
         if (InvToggle){
-            inv.SetActive(true);
+           inv.SetActive(true);
         }
         else
         {

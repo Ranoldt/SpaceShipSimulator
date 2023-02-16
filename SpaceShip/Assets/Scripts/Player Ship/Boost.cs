@@ -6,20 +6,10 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 public class Boost : MonoBehaviour
 {
-    [SerializeField]
-    private float boostStrength;
-
-    [SerializeField]
-    private float boostRecoveryRate;
-
-    [SerializeField]
-    private float boostRecoveryInterval;
+    public BoostComponent boostdata;
 
     [SerializeField]
     private Slider boostBar;
-
-    [SerializeField]
-    private float boostTime;
 
     private bool boost;
     private float boostLeft;
@@ -31,7 +21,7 @@ public class Boost : MonoBehaviour
     void Start()
     {
         rb = this.GetComponent<Rigidbody>();
-        boostLeft = boostTime;
+        boostLeft = boostdata.boostTime;
         boostBar.value = 1;
     }
 
@@ -44,23 +34,23 @@ public class Boost : MonoBehaviour
 
     private void boostRecovery()
     {
-        if (Time.time >= lastBoostTime + boostRecoveryInterval && !boost)
+        if (Time.time >= lastBoostTime + boostdata.boostRecoveryInterval && !boost)
         {
-            boostLeft += (Time.deltaTime * boostRecoveryRate);
-            boostLeft = Mathf.Clamp(boostLeft, 0, boostTime);
+            boostLeft += (Time.deltaTime * boostdata.boostRecoveryRate);
+            boostLeft = Mathf.Clamp(boostLeft, 0, boostdata.boostTime);
         }
     }
 
     private void UpdateUI()
     {
-        boostBar.value = boostLeft / boostTime; //value made as a percentage so you dont have to adjust the values every time boostTime changes
+        boostBar.value = boostLeft / boostdata.boostTime; //value made as a percentage so you dont have to adjust the values every time boostTime changes
     }
 
     private void BoostMove()
     {
         if(boost && boostLeft > 0)
         {
-            rb.AddRelativeForce(Vector3.forward * boostStrength * Time.deltaTime);
+            rb.AddRelativeForce(Vector3.forward * boostdata.boostStrength * Time.deltaTime);
             boostLeft -= Time.fixedDeltaTime;
         }
     }
