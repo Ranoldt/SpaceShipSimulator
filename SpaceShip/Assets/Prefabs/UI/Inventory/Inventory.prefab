@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7031827640187643501}
   m_Layer: 5
   m_Name: Inventory
-  m_TagString: Untagged
+  m_TagString: Inventory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -216,6 +216,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4057098582930286012, guid: 95e71bd1db9a3fa4bb2e61cb60cdafae, type: 3}
+      propertyPath: m_text
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057098583141869663, guid: 95e71bd1db9a3fa4bb2e61cb60cdafae, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: fa5e0f99076743e4eb70805f43b3aaee, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95e71bd1db9a3fa4bb2e61cb60cdafae, type: 3}
 --- !u!224 &7031827641797561599 stripped
@@ -1542,6 +1550,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4057098582930286012, guid: 95e71bd1db9a3fa4bb2e61cb60cdafae, type: 3}
+      propertyPath: m_text
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4057098583141869663, guid: 95e71bd1db9a3fa4bb2e61cb60cdafae, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c0d95259e29f97b458884efe8180fbe2, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95e71bd1db9a3fa4bb2e61cb60cdafae, type: 3}
 --- !u!224 &6474949561064540545 stripped

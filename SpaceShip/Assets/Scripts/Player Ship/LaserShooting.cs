@@ -6,6 +6,9 @@ using TMPro;
 
 public class LaserShooting : MonoBehaviour
 {
+    [SerializeField]
+    private BeamType beamdata;
+
     //variables for levelling mining power
     private int laserLevel;
     private float totalPower;
@@ -19,29 +22,15 @@ public class LaserShooting : MonoBehaviour
 
     [SerializeField]
     private Transform[] LaserOrigin;
-    [SerializeField]
-    private LayerMask shootingMask;
-    [SerializeField]
-    private float laserRange = 100f;
-    private bool targetInRange = false;
+  
     [SerializeField]
     private Transform OriginMiddle;
 
     [SerializeField]
     private LineRenderer[] lasers;
-    [SerializeField]
-    private ParticleSystem laserHitParticles;
-    [SerializeField]
-    private float miningPower = 1f;
-    public float _miningPower { get { return miningPower; } private set { _miningPower = value; } }
+    
+    public float _miningPower { get { return beamdata.miningPower; } private set { _miningPower = value; } }
 
-
-    [SerializeField]
-    private float laserHeatThreshold = 2f;
-    [SerializeField]
-    private float laserHeatRate = 0.25f;
-    [SerializeField]
-    private float laserCoolRate = 0.5f;
     private float currentlaserheat = 0f;
     private bool overHeated = false;
     private bool firing;
@@ -54,20 +43,20 @@ public class LaserShooting : MonoBehaviour
 
     public float LaserHeatThreshold
     {
-        get { return laserHeatThreshold; }
+        get { return beamdata.laserHeatThreshold; }
     }
     private void Awake()
     {
         playercamera = Camera.main;
-        totalPower = miningPower; //variable initialization
+        totalPower = beamdata.miningPower; //variable initialization
         cost = 1000;
         costText.text = "Cost: $" + cost.ToString();
     }
 
     private void Update()
     {
-        LaserFiring();
-        
+       LaserFiring();
+       
     }
 
     public void LevelUpLaser()
@@ -76,7 +65,7 @@ public class LaserShooting : MonoBehaviour
         {
             inventory.currentCash -= cost;
             laserLevel += 1;
-            totalPower = miningPower + (1.5f * laserLevel);
+            totalPower = beamdata.miningPower + (1.5f * laserLevel);
             cost = ((int)Mathf.Round(cost * 1.5f));
             costText.text = "Cost: $" + cost.ToString();
         }
@@ -104,14 +93,14 @@ public class LaserShooting : MonoBehaviour
         RaycastHit Hitinfo;
 
 
-        if(TargetInfo.IsTargetInRange(OriginMiddle.transform.position,OriginMiddle.transform.forward, out Hitinfo, laserRange, shootingMask))
+        if(TargetInfo.IsTargetInRange(OriginMiddle.transform.position,OriginMiddle.transform.forward, out Hitinfo, beamdata.laserRange, beamdata.shootingMask))
         {
             IShootable target = Hitinfo.transform.GetComponent<IShootable>();
             if(target != null)
             {
                 target.damage(totalPower);
             }
-            Instantiate(laserHitParticles, Hitinfo.point, Quaternion.LookRotation(Hitinfo.normal));
+            Instantiate(beamdata.laserHitParticles, Hitinfo.point, Quaternion.LookRotation(Hitinfo.normal));
 
             foreach(var laser in lasers)
             {
@@ -125,32 +114,20 @@ public class LaserShooting : MonoBehaviour
             foreach(var laser in lasers)
             {
                 laser.gameObject.SetActive(true);
-                laser.SetPosition(1, new Vector3(0, 0, laserRange));
+                laser.SetPosition(1, new Vector3(0, 0, beamdata.laserRange));
             }
         }
         HeatLaser();
         
     }
 
-    //IEnumerator ShootLaser()
-    //{
-    //    foreach(var laser in lasers)
-    //    {
-    //        laser.gameObject.SetActive(true);
-    //    }
-    //    yield return new WaitForSeconds(laserHeatThreshold);
-    //    foreach (var laser in lasers)
-    //    {
-    //        laser.gameObject.SetActive(false);
-    //    }
-    //}
     void HeatLaser()
     {
-        if (firing && currentlaserheat < laserHeatThreshold)
+        if (firing && currentlaserheat < beamdata.laserHeatThreshold)
         {
-            currentlaserheat += laserHeatRate * Time.deltaTime;
+            currentlaserheat += beamdata.laserHeatRate * Time.deltaTime;
 
-            if (currentlaserheat >= laserHeatThreshold)
+            if (currentlaserheat >= beamdata.laserHeatThreshold)
             {
                 overHeated = true;
                 firing = false;
@@ -162,7 +139,7 @@ public class LaserShooting : MonoBehaviour
     {
         if (overHeated)
         {
-            if (currentlaserheat / laserHeatThreshold <= 0.5f)
+            if (currentlaserheat / beamdata.laserHeatThreshold <= 0.5f)
             {
                 overHeated = false;
             }
@@ -170,7 +147,7 @@ public class LaserShooting : MonoBehaviour
         
             if (currentlaserheat > 0f)
             {
-                currentlaserheat -= laserCoolRate * Time.deltaTime;
+                currentlaserheat -= beamdata.laserCoolRate * Time.deltaTime;
             }
         
     }

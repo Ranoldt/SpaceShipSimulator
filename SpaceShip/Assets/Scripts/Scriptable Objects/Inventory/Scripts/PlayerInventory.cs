@@ -6,7 +6,6 @@ using TMPro;
 
 public class PlayerInventory : MonoBehaviour
 {
-    [SerializeField]
     Transform itemParent;
     [SerializeField]
     private TMP_Text money;
@@ -18,8 +17,10 @@ public class PlayerInventory : MonoBehaviour
 
     private void Start()
     {
-        inventory.OnItemChangedCallback += UpdateUI;
+        itemParent = gameObject.GetComponent<UIManager>()._inv.transform;
 
+        UpdateUI(); // make sure the inventory is updated on startup
+        inventory.OnItemChangedCallback += UpdateUI;
         slots = itemParent.GetComponentsInChildren<Slot>();
     }
 
@@ -40,12 +41,20 @@ public class PlayerInventory : MonoBehaviour
     }
     private void UpdateUI()
     {
-        slots = itemParent.GetComponentsInChildren<Slot>();
+        slots = itemParent.GetComponentsInChildren<Slot>(); // remake the array
         //read the inventory list and populate the next available slot if it sees a new object
         for (int i = 0; i < inventory.Container.Count; i++)
         {
             slots[i].AddItem(inventory.Container[i].item,inventory.Container[i].amount);
         }
+        if (inventory.Container.Count == 0)
+        {
+            for(int i = slots.Length - 1; i >= 0; i--)
+            {
+                slots[i].ClearSlot();
+            }
+        }
+
     }
 
     public void OnTriggerEnter(Collider other)

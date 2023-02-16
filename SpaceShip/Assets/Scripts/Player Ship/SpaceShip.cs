@@ -7,8 +7,6 @@ using UnityEngine.InputSystem.Interactions;
 [RequireComponent(typeof(Rigidbody))]
 public class SpaceShip : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject inv;
 
     [SerializeField]
     private ShipObject shipdata;
@@ -99,16 +97,5 @@ public class SpaceShip : MonoBehaviour
         pitchYaw = context.ReadValue<Vector2>();
     }
 
-    public void OnInvToggle(InputAction.CallbackContext context)
-    {
-        InvToggle = !InvToggle;
 
-        if (InvToggle){
-           inv.SetActive(true);
-        }
-        else
-        {
-            inv.SetActive(false);
-        }
-    }
 }
