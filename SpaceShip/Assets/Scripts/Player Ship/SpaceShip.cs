@@ -19,7 +19,6 @@ public class SpaceShip : MonoBehaviour
     private float strafeB;
     private float rollB;
     private Vector2 pitchYaw;
-    private bool InvToggle = false;
 
 
     // Start is called before the first frame update

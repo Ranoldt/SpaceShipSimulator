@@ -15,6 +15,8 @@ public class ItemObject : ScriptableObject
     public Sprite icon;
     public ItemType type;
     public int SellAmount;
+    public int MaxStack;
+
     [TextArea(15, 20)]
     public string description;
 

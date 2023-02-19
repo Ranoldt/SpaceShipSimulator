@@ -9,7 +9,7 @@ public class LevelUp : MonoBehaviour
 
     private void Awake()
     {
-        boost = gameObject.GetComponent<Boost>().boostdata;
+        //boost = gameObject.GetComponent<Boost>().boostdata;
     }
 
 }

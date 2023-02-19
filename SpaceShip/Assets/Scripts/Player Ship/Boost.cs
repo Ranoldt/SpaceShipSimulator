@@ -6,52 +6,48 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 public class Boost : MonoBehaviour
 {
-    public BoostComponent boostdata;
+    //Behavior for the act of boosting
+    [SerializeField]
+    private BoostComponent boostdata;
+    [SerializeField]
+    private FloatVariable boostMax;
+    private float lastBoostTime;
+    private bool boost;
 
     [SerializeField]
-    private Slider boostBar;
-
-    private bool boost;
-    private float boostLeft;
+    private FloatVariable BoostCapacity;
+    public FloatVariable boostLeft { get { return BoostCapacity; } private set { boostLeft = value; } }
     private Rigidbody rb;
-
-    private float lastBoostTime;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = this.GetComponent<Rigidbody>();
-        boostLeft = boostdata.boostTime;
-        boostBar.value = 1;
+        boostLeft.SetValue(boostdata.boostTime);
+        boostMax.SetValue(boostdata.boostTime);
     }
 
     private void FixedUpdate()
     {
         BoostMove();
         boostRecovery();
-        UpdateUI();
     }
 
     private void boostRecovery()
     {
         if (Time.time >= lastBoostTime + boostdata.boostRecoveryInterval && !boost)
         {
-            boostLeft += (Time.deltaTime * boostdata.boostRecoveryRate);
-            boostLeft = Mathf.Clamp(boostLeft, 0, boostdata.boostTime);
+            boostLeft.IncrementValue (Time.deltaTime * boostdata.boostRecoveryRate);
+            boostLeft.SetValue( Mathf.Clamp(boostLeft.FloatValue, 0, boostdata.boostTime));
         }
-    }
-
-    private void UpdateUI()
-    {
-        boostBar.value = boostLeft / boostdata.boostTime; //value made as a percentage so you dont have to adjust the values every time boostTime changes
     }
 
     private void BoostMove()
     {
-        if(boost && boostLeft > 0)
+        if(boost && boostLeft.FloatValue > 0)
         {
             rb.AddRelativeForce(Vector3.forward * boostdata.boostStrength * Time.deltaTime);
-            boostLeft -= Time.fixedDeltaTime;
+            boostLeft.DecrementValue( Time.fixedDeltaTime);
         }
     }
 

@@ -7,10 +7,12 @@ public class InventoryObject : ScriptableObject
 {
     public List<InventorySlot> Container = new List<InventorySlot>();
 
-    public int currentCash;
+    public FloatVariable currentCash;
 
     public delegate void OnItemChanged();
     public OnItemChanged OnItemChangedCallback;
+
+    public FloatVariable MinSize;
 
     public void addItem(ItemObject _item, int _amount)
     {
@@ -35,6 +37,20 @@ public class InventoryObject : ScriptableObject
             if(OnItemChangedCallback != null)
                 OnItemChangedCallback.Invoke();
         }
+    }
+
+    public void sellItems()
+    {
+        for (int i = Container.Count - 1; i >= 0; i--)
+        {
+            int stackPrice = Container[i].item.SellAmount * Container[i].amount;
+            currentCash.IncrementValue (stackPrice);
+            Container.RemoveAt(i);
+
+            if (OnItemChangedCallback != null)
+                OnItemChangedCallback.Invoke();
+        }
+
     }
 
 }

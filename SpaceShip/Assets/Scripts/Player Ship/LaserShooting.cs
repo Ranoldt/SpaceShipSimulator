@@ -31,26 +31,26 @@ public class LaserShooting : MonoBehaviour
     
     public float _miningPower { get { return beamdata.miningPower; } private set { _miningPower = value; } }
 
-    private float currentlaserheat = 0f;
+    [SerializeField]
+    private FloatVariable currentlaserheat;
     private bool overHeated = false;
     private bool firing;
-    private Camera playercamera;
 
     public float Currentlaserheat
     {
-        get { return currentlaserheat; }
+        get { return currentlaserheat.FloatValue; }
     }
 
-    public float LaserHeatThreshold
-    {
-        get { return beamdata.laserHeatThreshold; }
-    }
+    [SerializeField]
+    private FloatVariable LaserHeatThreshold;
     private void Awake()
     {
-        playercamera = Camera.main;
         totalPower = beamdata.miningPower; //variable initialization
         cost = 1000;
         costText.text = "Cost: $" + cost.ToString();
+
+        LaserHeatThreshold.SetValue(beamdata.laserHeatThreshold); //initialize the float variable for UI to see the value
+        //remember to also initialize it whenever this value changes (like when you upgrade the threshold)
     }
 
     private void Update()
@@ -61,9 +61,9 @@ public class LaserShooting : MonoBehaviour
 
     public void LevelUpLaser()
     {
-        if (inventory.currentCash >= cost)
+        if (inventory.currentCash.FloatValue >= cost)
         {
-            inventory.currentCash -= cost;
+            inventory.currentCash.DecrementValue (cost);
             laserLevel += 1;
             totalPower = beamdata.miningPower + (1.5f * laserLevel);
             cost = ((int)Mathf.Round(cost * 1.5f));
@@ -123,11 +123,11 @@ public class LaserShooting : MonoBehaviour
 
     void HeatLaser()
     {
-        if (firing && currentlaserheat < beamdata.laserHeatThreshold)
+        if (firing && currentlaserheat.FloatValue < beamdata.laserHeatThreshold)
         {
-            currentlaserheat += beamdata.laserHeatRate * Time.deltaTime;
+            currentlaserheat.FloatValue += beamdata.laserHeatRate * Time.deltaTime;
 
-            if (currentlaserheat >= beamdata.laserHeatThreshold)
+            if (currentlaserheat.FloatValue >= beamdata.laserHeatThreshold)
             {
                 overHeated = true;
                 firing = false;
@@ -139,15 +139,15 @@ public class LaserShooting : MonoBehaviour
     {
         if (overHeated)
         {
-            if (currentlaserheat / beamdata.laserHeatThreshold <= 0.5f)
+            if (currentlaserheat.FloatValue / beamdata.laserHeatThreshold <= 0.5f)
             {
                 overHeated = false;
             }
         }
         
-            if (currentlaserheat > 0f)
+            if (currentlaserheat.FloatValue > 0f)
             {
-                currentlaserheat -= beamdata.laserCoolRate * Time.deltaTime;
+                currentlaserheat.FloatValue -= beamdata.laserCoolRate * Time.deltaTime;
             }
         
     }
