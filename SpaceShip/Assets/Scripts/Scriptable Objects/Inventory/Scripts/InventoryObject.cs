@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory System/Inventory")]
 public class InventoryObject : ScriptableObject
@@ -47,9 +48,10 @@ public class InventoryObject : ScriptableObject
             currentCash.IncrementValue (stackPrice);
             Container.RemoveAt(i);
 
-            if (OnItemChangedCallback != null)
-                OnItemChangedCallback.Invoke();
         }
+
+        if (OnItemChangedCallback != null)
+            OnItemChangedCallback.Invoke(); //tells inventory to update
 
     }
 

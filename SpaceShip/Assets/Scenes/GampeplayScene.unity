@@ -1115,17 +1115,49 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 0.42978385
       objectReference: {fileID: 0}
+    - target: {fileID: 4274178584141894877, guid: e7f9a6c681fb09144932c4bf9e9b160c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5505636268693471662, guid: e7f9a6c681fb09144932c4bf9e9b160c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5505636268693471662, guid: e7f9a6c681fb09144932c4bf9e9b160c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5505636268693471662, guid: e7f9a6c681fb09144932c4bf9e9b160c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 11400000, guid: 0ec0012b9fa22a048a3cf80630914ee4, type: 2}
     - target: {fileID: 5505636268693471662, guid: e7f9a6c681fb09144932c4bf9e9b160c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: 884d8aa27ead33e47829097cf9a6b1a4, type: 2}
+    - target: {fileID: 5505636268693471662, guid: e7f9a6c681fb09144932c4bf9e9b160c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5505636268693471662, guid: e7f9a6c681fb09144932c4bf9e9b160c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: sellItems
       objectReference: {fileID: 0}
     - target: {fileID: 5505636268693471662, guid: e7f9a6c681fb09144932c4bf9e9b160c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Raise
+      objectReference: {fileID: 0}
+    - target: {fileID: 5505636268693471662, guid: e7f9a6c681fb09144932c4bf9e9b160c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: InventoryObject, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5505636268693471662, guid: e7f9a6c681fb09144932c4bf9e9b160c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Event, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5505636268693471662, guid: e7f9a6c681fb09144932c4bf9e9b160c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6266816326837547956, guid: e7f9a6c681fb09144932c4bf9e9b160c, type: 3}
       propertyPath: UI
@@ -2821,6 +2853,7 @@ GameObject:
   - component: {fileID: 1888734774}
   - component: {fileID: 1888734773}
   - component: {fileID: 1888734775}
+  - component: {fileID: 1888734776}
   m_Layer: 5
   m_Name: Money
   m_TagString: Untagged
@@ -2960,7 +2993,33 @@ MonoBehaviour:
   Event: {fileID: 11400000, guid: 884d8aa27ead33e47829097cf9a6b1a4, type: 2}
   Response:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1888734776}
+        m_TargetAssemblyTypeName: MoneyUI, Assembly-CSharp
+        m_MethodName: UpdateText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1888734776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1888734771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d611fd819438b1f478c1fda83b9c816c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moneyText: {fileID: 1888734773}
+  moneyAmount: {fileID: 11400000, guid: a91376effc0aca54099dc2c8b1256e27, type: 2}
 --- !u!1 &1966467912
 GameObject:
   m_ObjectHideFlags: 0

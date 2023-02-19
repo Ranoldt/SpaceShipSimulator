@@ -8,11 +8,13 @@ public class Event : ScriptableObject
     /// <summary>
     /// A scriptable object used to create events
     /// </summary>
-    private readonly List<EventListener> listeners = new List<EventListener>();
+    private readonly List<EventListener> listeners = 
+        new List<EventListener>();
 
     public void Raise()
     {
-        for (int i = listeners.Count;i>=0; i-- )
+        Debug.Log(listeners.Count);
+        for (int i = listeners.Count-1;i>=0; i-- )
         {
             listeners[i].OnEventRaised();
         }

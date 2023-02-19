@@ -13,10 +13,10 @@ public class EventListener : MonoBehaviour
         Event.AddListener(this);
     }
 
-    private void OnDisable()
-    {
-        Event.RemoveListener(this);
-    }
+    //private void OnDisable()
+    //{
+      //  Event.RemoveListener(this);
+    //}
 
     public void OnEventRaised()
     {

@@ -9,19 +9,7 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField]
     private FloatVariable invSize;
 
-    private TMP_Text money;
-
     public InventoryObject inventory;
-
-    private void Start()
-    {
-        money = UIManager.UIinstance.moneyText;
-    }
-
-    private void Update()
-    {
-        money.text = "$" + inventory.currentCash.FloatValue.ToString(); //update ui
-    }
 
     public void OnTriggerEnter(Collider other)
     {
