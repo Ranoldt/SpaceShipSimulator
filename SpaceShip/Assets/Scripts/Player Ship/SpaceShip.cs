@@ -8,8 +8,9 @@ using UnityEngine.InputSystem.Interactions;
 public class SpaceShip : MonoBehaviour
 {
 
-    [SerializeField]
-    private ShipObject shipdata;
+    public ShipObject shipdata;//accessed by other scripts on the objects
+    //this is so that we can easily reference the components of the ship
+    //which is necessary for a customizable asset
 
 
     Rigidbody rb;

@@ -7,10 +7,10 @@ public class ShipObject : ShipDataObject
 {
     public InventoryObject inv;
 
-    public GameObject mininglaser;
+    public MineObjects miningTool;
 
-    public int miningLevel;
-    public int boostLevel;
-    public int moveLevel;
+    public InventoryObject inventory;
+
+    public BoostComponent boost;
 
 }

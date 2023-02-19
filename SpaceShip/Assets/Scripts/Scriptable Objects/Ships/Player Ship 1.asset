@@ -19,7 +19,6 @@ MonoBehaviour:
   upThrust: 500
   strafeThrust: 300
   inv: {fileID: 11400000, guid: 0ec0012b9fa22a048a3cf80630914ee4, type: 2}
-  mininglaser: {fileID: 0}
-  miningLevel: 1
-  boostLevel: 1
-  moveLevel: 1
+  miningTool: {fileID: 11400000, guid: 95c616d37411b174cb016712d366c1a4, type: 2}
+  inventory: {fileID: 11400000, guid: 0ec0012b9fa22a048a3cf80630914ee4, type: 2}
+  boost: {fileID: 11400000, guid: 60153f98d1ddbdd4f889358a7349db6d, type: 2}

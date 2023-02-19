@@ -2,14 +2,25 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class PlayerInventory : MonoBehaviour
 {
+    //TODO: implement stack size and inv size
+
+    /// <summary>
+    /// This script is only responsible for adding new items in the inventory on collision with an item object.
+    /// The actual list logic is stored in the InventoryObject, and the UI component is dealt with in the Inventory Menu script
+    /// </summary>
     [SerializeField]
     private FloatVariable invSize;
 
-    public InventoryObject inventory;
+    private InventoryObject inventory;
+
+    private void Start()
+    {
+        inventory = gameObject.GetComponent<SpaceShip>().shipdata.inv;
+        invSize.SetValue(inventory.MinSize.FloatValue);
+    }
 
     public void OnTriggerEnter(Collider other)
     {

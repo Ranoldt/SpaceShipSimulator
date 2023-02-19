@@ -259,8 +259,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LaserShooting, Assembly-CSharp
-        m_MethodName: LevelUpLaser
+        m_TargetAssemblyTypeName: LevelUp, Assembly-CSharp
+        m_MethodName: MinePowerLevelUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -281,6 +281,8 @@ GameObject:
   - component: {fileID: 2045919936}
   - component: {fileID: 2045919938}
   - component: {fileID: 2045919937}
+  - component: {fileID: 617685437}
+  - component: {fileID: 617685436}
   m_Layer: 5
   m_Name: Laser Cost
   m_TagString: Untagged
@@ -405,6 +407,48 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &617685437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2045919935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1732b9cb632b1364eacaf6108de4d021, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shoptext: {fileID: 2045919937}
+  cost: {fileID: 11400000, guid: f612842eba57fe447a1db5dab4161bf2, type: 2}
+--- !u!114 &617685436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2045919935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26d2f49a2c10d3344ad28962d2dcabed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 07307389ada04234fb26352e7213f61a, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 617685437}
+        m_TargetAssemblyTypeName: MinePowerCostUi, Assembly-CSharp
+        m_MethodName: updateCost
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4274178584141894877
 GameObject:
   m_ObjectHideFlags: 0
@@ -527,9 +571,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerInventory, Assembly-CSharp
+      - m_Target: {fileID: 11400000, guid: 0ec0012b9fa22a048a3cf80630914ee4, type: 2}
+        m_TargetAssemblyTypeName: InventoryObject, Assembly-CSharp
         m_MethodName: sellItems
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 884d8aa27ead33e47829097cf9a6b1a4, type: 2}
+        m_TargetAssemblyTypeName: Event, Assembly-CSharp
+        m_MethodName: Raise
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -962,7 +1018,7 @@ RectTransform:
   m_GameObject: {fileID: 7427212654015231805}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.27073, y: 0.27073, z: 0.27073}
+  m_LocalScale: {x: 0.37225375, y: 0.42978385, z: 0.27073}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 969272681180208094}
@@ -1025,7 +1081,7 @@ GameObject:
   - component: {fileID: 5217968983231618806}
   - component: {fileID: 7302979993791022334}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Press E
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

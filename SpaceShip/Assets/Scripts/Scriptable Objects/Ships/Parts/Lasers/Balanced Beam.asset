@@ -21,3 +21,4 @@ MonoBehaviour:
   laserHeatThreshold: 2
   laserHeatRate: 0.25
   laserCoolRate: 0.5
+  minepowerlevel: {fileID: 11400000, guid: 03d3fbcd4f7d87245be3b6b464cb5a4c, type: 2}

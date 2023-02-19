@@ -17,4 +17,6 @@ public class MineObjects : ScriptableObject
     public float laserHeatRate = 0.25f;
 
     public float laserCoolRate = 0.5f;
+
+    public FloatVariable minepowerlevel;
 }

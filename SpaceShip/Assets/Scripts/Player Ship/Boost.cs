@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class Boost : MonoBehaviour
 {
     //Behavior for the act of boosting
-    [SerializeField]
     private BoostComponent boostdata;
     [SerializeField]
     private FloatVariable boostMax;
@@ -22,6 +21,7 @@ public class Boost : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        boostdata = gameObject.GetComponent<SpaceShip>().shipdata.boost;
         rb = this.GetComponent<Rigidbody>();
         boostLeft.SetValue(boostdata.boostTime);
         boostMax.SetValue(boostdata.boostTime);

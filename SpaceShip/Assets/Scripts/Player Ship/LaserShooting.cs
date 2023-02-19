@@ -6,18 +6,14 @@ using TMPro;
 
 public class LaserShooting : MonoBehaviour
 {
-    [SerializeField]
-    private BeamType beamdata;
+    private MineObjects beamdata;
 
     //variables for levelling mining power
-    private int laserLevel;
-    private float totalPower;
-    private int cost;
+    [SerializeField]
+    private FloatVariable laserLevel;
 
     [SerializeField]
-    InventoryObject inventory;
-    [SerializeField]
-    private TMP_Text costText;
+    private FloatVariable cost;
 
 
     [SerializeField]
@@ -45,9 +41,8 @@ public class LaserShooting : MonoBehaviour
     private FloatVariable LaserHeatThreshold;
     private void Awake()
     {
-        totalPower = beamdata.miningPower; //variable initialization
-        cost = 1000;
-        costText.text = "Cost: $" + cost.ToString();
+        beamdata = gameObject.GetComponent<SpaceShip>().shipdata.miningTool; //access player ship data's mining tool component
+        // The component is self contained within the prefab- there are no unnecessary dependencies.
 
         LaserHeatThreshold.SetValue(beamdata.laserHeatThreshold); //initialize the float variable for UI to see the value
         //remember to also initialize it whenever this value changes (like when you upgrade the threshold)
@@ -57,18 +52,6 @@ public class LaserShooting : MonoBehaviour
     {
        LaserFiring();
        
-    }
-
-    public void LevelUpLaser()
-    {
-        if (inventory.currentCash.FloatValue >= cost)
-        {
-            inventory.currentCash.DecrementValue (cost);
-            laserLevel += 1;
-            totalPower = beamdata.miningPower + (1.5f * laserLevel);
-            cost = ((int)Mathf.Round(cost * 1.5f));
-            costText.text = "Cost: $" + cost.ToString();
-        }
     }
 
     private void LaserFiring()
@@ -98,7 +81,7 @@ public class LaserShooting : MonoBehaviour
             IShootable target = Hitinfo.transform.GetComponent<IShootable>();
             if(target != null)
             {
-                target.damage(totalPower);
+                target.damage(beamdata.miningPower + (1.5f * laserLevel.FloatValue));//total power of laser
             }
             Instantiate(beamdata.laserHitParticles, Hitinfo.point, Quaternion.LookRotation(Hitinfo.normal));
 
