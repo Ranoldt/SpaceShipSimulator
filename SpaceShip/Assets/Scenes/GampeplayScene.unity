@@ -2751,7 +2751,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   invUi: {fileID: 114655048}
-  MinSize: {fileID: 11400000, guid: 01185cd51994c2c49ba9c13737854169, type: 2}
+  slot: {fileID: 4057098582458061198, guid: 95e71bd1db9a3fa4bb2e61cb60cdafae, type: 3}
+  invSize: {fileID: 11400000, guid: f1e2af05e23d3204092e4c78db1560be, type: 2}
   inventoryData: {fileID: 11400000, guid: 0ec0012b9fa22a048a3cf80630914ee4, type: 2}
 --- !u!1 &1888734771
 GameObject:

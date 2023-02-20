@@ -14,30 +14,34 @@ public class InventoryObject : ScriptableObject
     public OnItemChanged OnItemChangedCallback;
 
     public FloatVariable MinSize;
+    public FloatVariable InvSize;
 
-    public void addItem(ItemObject _item, int _amount)
+    public bool addItem(ItemObject _item, int _amount)
     {
         //check if you have item in inv
         bool hasItem = false;
         for (int i = 0; i < Container.Count; i ++)
         {
-            if(Container[i].item == _item)
+            if(Container[i].item == _item && Container[i].amount < _item.MaxStack)
             {
                 Container[i].addAmount(_amount);
                 hasItem = true;
                 if (OnItemChangedCallback != null)
                     OnItemChangedCallback.Invoke();
-                break;
+                return true;
             }
         }
 
-        if (!hasItem)
+        if (!hasItem && Container.Count < InvSize.FloatValue) //add a new slot when you have available space
         {
             Container.Add(new InventorySlot(_item, _amount));
 
             if(OnItemChangedCallback != null)
                 OnItemChangedCallback.Invoke();
+            return true;
         }
+
+        return false;
     }
 
     public void sellItems()

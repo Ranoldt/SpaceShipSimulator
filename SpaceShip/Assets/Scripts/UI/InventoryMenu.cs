@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,7 +19,10 @@ public class InventoryMenu : MonoBehaviour
     private GameObject invUi;
 
     [SerializeField]
-    private FloatVariable MinSize;
+    private GameObject slot;
+
+    [SerializeField]
+    private FloatVariable invSize;
 
     [SerializeField]
     private InventoryObject inventoryData;
@@ -27,13 +31,24 @@ public class InventoryMenu : MonoBehaviour
 
     private void Awake()
     {
-        slots = invUi.GetComponentsInChildren<Slot>();
         UpdateUI(); //just making sure the UI's updated on start
     }
 
     private void Start()
     {
-        inventoryData.OnItemChangedCallback += UpdateUI;
+        ConstructUI();
+        slots = invUi.GetComponentsInChildren<Slot>();
+        inventoryData.OnItemChangedCallback += UpdateUI; //subscribe to an event set up in InventoryObject
+    }
+
+    private void ConstructUI()
+    {
+        for(int i = 0; i < invSize.FloatValue; i++)
+        {
+            var spawnedSlot = Instantiate(slot);
+            spawnedSlot.transform.SetParent(this.gameObject.transform.GetChild(0).transform, false); 
+            //make the slot the child of the inventory panel
+        }
     }
 
     private void UpdateUI()
@@ -56,7 +71,6 @@ public class InventoryMenu : MonoBehaviour
 
 
     public void InvToggle(InputAction.CallbackContext context)
-        //TODO: Decouple from player ship? does it matter?
     {
         if (invUi.activeSelf)
         {
