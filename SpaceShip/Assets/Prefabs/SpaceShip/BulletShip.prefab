@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6525150597279178122}
   m_Layer: 8
   m_Name: Origin 02
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6525150597279178117}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.001, y: -0.201, z: 1.887}
+  m_LocalPosition: {x: -0.4, y: 0.29, z: 3.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -75,11 +75,11 @@ GameObject:
   - component: {fileID: 6525150598981605648}
   - component: {fileID: 6525150598981605651}
   - component: {fileID: 6525150598981605650}
-  - component: {fileID: 6525150598379785629}
   - component: {fileID: 6525150598981605645}
-  - component: {fileID: 6525150598379785631}
   - component: {fileID: 6525150598981605644}
   - component: {fileID: 6525150598379785700}
+  - component: {fileID: 1650500705}
+  - component: {fileID: 118481581}
   m_Layer: 8
   m_Name: BulletShip
   m_TagString: Player
@@ -119,7 +119,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d83c9590bf14a0347a1dec13834d5445, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inv: {fileID: 0}
   shipdata: {fileID: 11400000, guid: 2e3f4712a33b93840aae40bc0034f3b8, type: 2}
 --- !u!54 &6525150598981605651
 Rigidbody:
@@ -244,8 +243,8 @@ MonoBehaviour:
     m_ActionName: Ship/PitchYaw[/Mouse/delta]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6525150598379785629}
-        m_TargetAssemblyTypeName: LaserShooting, Assembly-CSharp
+      - m_Target: {fileID: 118481581}
+        m_TargetAssemblyTypeName: BulletShooting, Assembly-CSharp
         m_MethodName: OnFire
         m_Mode: 0
         m_Arguments:
@@ -276,9 +275,9 @@ MonoBehaviour:
     m_ActionName: Ship/Boost[/Keyboard/leftShift]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6525150598981605648}
-        m_TargetAssemblyTypeName: SpaceShip, Assembly-CSharp
-        m_MethodName: OnInvToggle
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: InventoryMenu, Assembly-CSharp
+        m_MethodName: InvToggle
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -295,28 +294,6 @@ MonoBehaviour:
   m_DefaultActionMap: Ship
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &6525150598379785629
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6525150597555728878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a672683bc32f46a4f82e13e08120c45f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  beamdata: {fileID: 11400000, guid: 95c616d37411b174cb016712d366c1a4, type: 2}
-  inventory: {fileID: 11400000, guid: 0ec0012b9fa22a048a3cf80630914ee4, type: 2}
-  costText: {fileID: 0}
-  LaserOrigin:
-  - {fileID: 6525150598798463992}
-  - {fileID: 6525150597279178122}
-  OriginMiddle: {fileID: 6525150597487702385}
-  lasers:
-  - {fileID: 6525150598978558960}
-  - {fileID: 6525150599411564034}
 --- !u!114 &6525150598981605645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -329,23 +306,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43a0a3b6bf6ec694da1f082ac8d63a54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boostdata: {fileID: 11400000, guid: 60153f98d1ddbdd4f889358a7349db6d, type: 2}
-  boostBar: {fileID: 0}
---- !u!114 &6525150598379785631
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6525150597555728878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76ef5d7c0895dc642a5c5a35e7322f6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemParent: {fileID: 0}
-  money: {fileID: 0}
-  inventory: {fileID: 11400000, guid: 0ec0012b9fa22a048a3cf80630914ee4, type: 2}
+  boostMax: {fileID: 11400000, guid: e57b2059dfd0b7945aa967f681c83472, type: 2}
+  BoostCapacity: {fileID: 11400000, guid: dae85d590de0b4649842cebcd2517d44, type: 2}
 --- !u!136 &6525150598981605644
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -372,6 +334,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a86c9f367a1350a4dbd9051f17797a03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentCash: {fileID: 11400000, guid: a91376effc0aca54099dc2c8b1256e27, type: 2}
+  minePowerCost: {fileID: 11400000, guid: f612842eba57fe447a1db5dab4161bf2, type: 2}
+  minePowerLevel: {fileID: 11400000, guid: 03d3fbcd4f7d87245be3b6b464cb5a4c, type: 2}
+  MoneyChange: {fileID: 11400000, guid: 884d8aa27ead33e47829097cf9a6b1a4, type: 2}
+  UpgradeChange: {fileID: 11400000, guid: 07307389ada04234fb26352e7213f61a, type: 2}
+--- !u!114 &1650500705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6525150597555728878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76ef5d7c0895dc642a5c5a35e7322f6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &118481581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6525150597555728878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea7b758def71fbe4188a2c16d90b30e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minePower: {fileID: 11400000, guid: 47fae72974f28104e8c2aa63d31e35cf, type: 2}
+  laserIntervals: 0.5
+  laserLevel: {fileID: 11400000, guid: 03d3fbcd4f7d87245be3b6b464cb5a4c, type: 2}
+  cost: {fileID: 11400000, guid: f612842eba57fe447a1db5dab4161bf2, type: 2}
+  LaserOrigin:
+  - {fileID: 6525150598798463992}
+  - {fileID: 6525150597279178122}
+  OriginMiddle: {fileID: 6525150597487702385}
+  currentlaserheat: {fileID: 11400000, guid: 7d622d2f6c6780541b1250d23a87e929, type: 2}
+  LaserHeatThreshold: {fileID: 11400000, guid: db20cf6fb4cf8d14b8ca0e3852b43a5e, type: 2}
 --- !u!1 &6525150597586169750
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,7 +413,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6525150597586169750}
-  m_Mesh: {fileID: 4300000, guid: 37c207c8cc5c148039684b9323528dba, type: 3}
+  m_Mesh: {fileID: 4300000, guid: d7fcbff04d2a74555be8772f47c0f0de, type: 3}
 --- !u!23 &6525150597586169748
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -468,7 +469,7 @@ GameObject:
   - component: {fileID: 6525150597770281842}
   m_Layer: 8
   m_Name: Grab Range
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -826,7 +827,7 @@ GameObject:
   - component: {fileID: 6525150598798463992}
   m_Layer: 8
   m_Name: Origin 01
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -839,7 +840,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6525150598798463995}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.001, y: -0.201, z: 1.887}
+  m_LocalPosition: {x: 0.4, y: 0.23, z: 3.57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

@@ -3,11 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class LaserShooting : MonoBehaviour
+public class BulletShooting : MonoBehaviour
 {
     private MineObjects beamdata;
 
+    [SerializeField]
+    private FloatVariable minePower;
+
     //variables for levelling mining power
+    [SerializeField]
+    private float laserIntervals;
+
+    private float nextLaserTime;
+
+    private bool shootable;
+
     [SerializeField]
     private FloatVariable laserLevel;
 
@@ -17,13 +27,10 @@ public class LaserShooting : MonoBehaviour
 
     [SerializeField]
     private Transform[] LaserOrigin;
-  
+
     [SerializeField]
     private Transform OriginMiddle;
 
-    [SerializeField]
-    private LineRenderer[] lasers;
-    
     public float _miningPower { get { return beamdata.miningPower; } private set { _miningPower = value; } }
 
     [SerializeField]
@@ -45,62 +52,43 @@ public class LaserShooting : MonoBehaviour
 
         LaserHeatThreshold.SetValue(beamdata.laserHeatThreshold); //initialize the float variable for UI to see the value
         //remember to also initialize it whenever this value changes (like when you upgrade the threshold)
+
+        minePower.SetValue(beamdata.miningPower);
     }
 
     private void Update()
     {
-       LaserFiring();
-       
-    }
+        if(Time.time >= nextLaserTime)
+        {
+            shootable = true;
+        }
 
+        LaserFiring();
+    }
     private void LaserFiring()
     {
-        if (firing && !overHeated)
+        if (firing && !overHeated && shootable)
         {
             FireLaser();
         }
         else
         {
-            foreach(var laser in lasers)
-            {
-                laser.gameObject.SetActive(false);
-            }
             CoolLaser();
         }
     }
 
     void FireLaser()
     {
+        foreach (var firePoint in LaserOrigin)
+        {
+            var bulletFab = beamdata as BulletType;
+            Instantiate(bulletFab.bullet, firePoint.transform);
+            shootable = false;
+            nextLaserTime = Time.time + laserIntervals;
+        }
         
-        RaycastHit Hitinfo;
-
-
-        if(TargetInfo.IsTargetInRange(OriginMiddle.transform.position,OriginMiddle.transform.forward, out Hitinfo, beamdata.laserRange, beamdata.shootingMask))
-        {
-            IShootable target = Hitinfo.transform.GetComponent<IShootable>();
-            if(target != null)
-            {
-                target.damage(beamdata.miningPower + (1.5f * laserLevel.FloatValue));//total power of laser
-            }
-            Instantiate(beamdata.laserHitParticles, Hitinfo.point, Quaternion.LookRotation(Hitinfo.normal));
-
-            foreach(var laser in lasers)
-            {
-                Vector3 localHitPosition = laser.transform.InverseTransformPoint(Hitinfo.point);
-                laser.gameObject.SetActive(true);
-                laser.SetPosition(1, localHitPosition);
-            }    
-        }
-        else
-        {
-            foreach(var laser in lasers)
-            {
-                laser.gameObject.SetActive(true);
-                laser.SetPosition(1, new Vector3(0, 0, beamdata.laserRange));
-            }
-        }
         HeatLaser();
-        
+
     }
 
     void HeatLaser()
@@ -126,12 +114,12 @@ public class LaserShooting : MonoBehaviour
                 overHeated = false;
             }
         }
-        
-            if (currentlaserheat.FloatValue > 0f)
-            {
-                currentlaserheat.FloatValue -= beamdata.laserCoolRate * Time.deltaTime;
-            }
-        
+
+        if (currentlaserheat.FloatValue > 0f)
+        {
+            currentlaserheat.FloatValue -= beamdata.laserCoolRate * Time.deltaTime;
+        }
+
     }
 
     public void OnFire(InputAction.CallbackContext context)
@@ -139,6 +127,6 @@ public class LaserShooting : MonoBehaviour
         firing = context.performed;
     }
 
-   
+
 
 }
