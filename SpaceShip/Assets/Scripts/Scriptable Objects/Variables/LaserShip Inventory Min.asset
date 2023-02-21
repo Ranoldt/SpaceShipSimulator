@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: LaserShip Inventory Min
   m_EditorClassIdentifier: 
   developerDescription: the default minimum inventory size for a laser ship
-  FloatValue: 5
+  FloatValue: 4

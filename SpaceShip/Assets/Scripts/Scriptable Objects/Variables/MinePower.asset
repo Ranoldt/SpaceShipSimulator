@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8909ca1947eb15944bb4c67b4919822b, type: 3}
-  m_Name: Mining Power level
+  m_Name: MinePower
   m_EditorClassIdentifier: 
-  developerDescription: the level of your mining tool
-  FloatValue: 1
+  developerDescription: Starting power of the mining tool
+  FloatValue: 0
