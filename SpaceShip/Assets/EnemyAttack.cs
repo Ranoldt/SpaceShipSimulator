@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyAttack : MonoBehaviour
 {
     [SerializeField]
-    public Transform target;
+    private Transform target;
     [SerializeField]
     private Transform Middle;
     [SerializeField]
@@ -19,6 +19,7 @@ public class EnemyAttack : MonoBehaviour
     RaycastHit hit;
 
     bool canFire =true;
+
     void Update()
     {
         if(InFront() && HaveLineOfSight())

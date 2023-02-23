@@ -95,7 +95,7 @@ public class BulletShooting : MonoBehaviour
     {
         if (firing && currentlaserheat.FloatValue < beamdata.laserHeatThreshold)
         {
-            currentlaserheat.FloatValue += beamdata.laserHeatRate * Time.deltaTime;
+            currentlaserheat.IncrementValue( beamdata.laserHeatRate);
 
             if (currentlaserheat.FloatValue >= beamdata.laserHeatThreshold)
             {

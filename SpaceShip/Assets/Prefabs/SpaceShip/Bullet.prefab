@@ -209,7 +209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f39030eb730df8843b59a4ce24f77003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 40
   life: 10
   minePower: {fileID: 11400000, guid: 47fae72974f28104e8c2aa63d31e35cf, type: 2}
   laserLevel: {fileID: 11400000, guid: 03d3fbcd4f7d87245be3b6b464cb5a4c, type: 2}
