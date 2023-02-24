@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoostObject : ScriptableObject
+public class BoostObject : ShipPart
 {
     public float boostStrength;
 

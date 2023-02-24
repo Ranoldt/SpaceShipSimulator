@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [CreateAssetMenu]
-public class MineObjects : ScriptableObject
+public class MineObjects : ShipPart
 {
     public LayerMask shootingMask;
 
