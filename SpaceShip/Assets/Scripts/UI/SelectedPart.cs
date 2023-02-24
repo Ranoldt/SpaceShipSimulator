@@ -5,13 +5,16 @@ using TMPro;
 
 public class SelectedPart : MonoBehaviour
 {
-    public TMP_Text display;
+    public TMP_Text display; //text on ui
     [HideInInspector] public ShipPart shipComponent;
 
-    public List<ShipPart> componentList;
+    public List<ShipPart> componentList { get { return _componentList; } private set { _componentList = value; } }
+    [SerializeField]
+    private List<ShipPart> _componentList;
 
     private void Awake()
     {
+        //set default values
         shipComponent = componentList[0];
         display.text = shipComponent.name;
     }

@@ -25,6 +25,7 @@ public class BulletBehavior : MonoBehaviour
 
     private void Update()
     {
+        //destroy the bullet if it lives for too long to make sure you don't overload performance
         if(timeAlive >= life)
         {
             Destroy(this.gameObject);
@@ -43,7 +44,7 @@ public class BulletBehavior : MonoBehaviour
 
         if(target != null)
         {
-            target.damage(minePower.FloatValue + (1.5f * laserLevel.FloatValue));
+            target.damage(minePower.FloatValue * (1.5f * laserLevel.FloatValue));
             Destroy(this.gameObject);
         }
     }

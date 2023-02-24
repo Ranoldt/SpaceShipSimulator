@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fe3a76bf42dae44f915422c112260cc, type: 3}
   m_Name: Player1
   m_EditorClassIdentifier: 
-  Container: []
+  container: []
   currentCash: {fileID: 11400000, guid: a91376effc0aca54099dc2c8b1256e27, type: 2}
-  MinSize: {fileID: 11400000, guid: 01185cd51994c2c49ba9c13737854169, type: 2}
+  minsize: 4
   InvSize: {fileID: 11400000, guid: f1e2af05e23d3204092e4c78db1560be, type: 2}

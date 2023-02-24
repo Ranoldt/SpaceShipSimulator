@@ -12,13 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9e61d1b30123d943adf8f5e38014ccd, type: 3}
   m_Name: Player Ship 1
   m_EditorClassIdentifier: 
-  yawTorque: 100
+  _yawTorque: 100
   pitchTorque: 200
+  _pitchTorque: 200
   rollTorque: 100
+  _rollTorque: 100
   thrust: 500
+  _thrust: 500
   upThrust: 500
+  _upThrust: 500
   strafeThrust: 300
-  inv: {fileID: 11400000, guid: 0ec0012b9fa22a048a3cf80630914ee4, type: 2}
+  _strafeThrust: 300
+  _inv: {fileID: 11400000, guid: 0ec0012b9fa22a048a3cf80630914ee4, type: 2}
   miningTool: {fileID: 11400000, guid: 938d7d7ef72304143bdf32858d46f3cd, type: 2}
-  inventory: {fileID: 11400000, guid: 0ec0012b9fa22a048a3cf80630914ee4, type: 2}
   boost: {fileID: 11400000, guid: 60153f98d1ddbdd4f889358a7349db6d, type: 2}

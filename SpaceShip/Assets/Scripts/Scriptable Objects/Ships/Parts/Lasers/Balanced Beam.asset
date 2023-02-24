@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 947fed687cce6874eb7048e843c1d354, type: 3}
   m_Name: Balanced Beam
   m_EditorClassIdentifier: 
-  shootingMask:
+  _shootingMask:
     serializedVersion: 2
     m_Bits: 64
-  laserRange: 100
-  laserHitParticles: {fileID: 3897070527687402240, guid: 1bf4fc6a1da5fa34a9f9f39f368cff84, type: 3}
-  miningPower: 1
-  laserHeatThreshold: 2
-  laserHeatRate: 0.25
-  laserCoolRate: 0.5
+  _laserRange: 100
+  _laserHitParticles: {fileID: 3897070527687402240, guid: 1bf4fc6a1da5fa34a9f9f39f368cff84, type: 3}
+  _miningPower: 1
+  _laserHeatThreshold: 2
+  _laserHeatRate: 0.25
+  _laserCoolRate: 0.5
   minepowerlevel: {fileID: 11400000, guid: 03d3fbcd4f7d87245be3b6b464cb5a4c, type: 2}

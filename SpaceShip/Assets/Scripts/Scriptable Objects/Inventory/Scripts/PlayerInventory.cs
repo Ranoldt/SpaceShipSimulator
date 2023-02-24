@@ -16,7 +16,7 @@ public class PlayerInventory : MonoBehaviour
     private void Start()
     {
         inventory = gameObject.GetComponent<SpaceShip>().shipdata.inv;
-        inventory.InvSize.SetValue(inventory.MinSize.FloatValue); //initialize minimum inventory size
+        inventory.InvSize.SetValue(inventory.MinSize); //initialize minimum inventory size
     }
 
     public void OnTriggerEnter(Collider other)

@@ -6,14 +6,21 @@ using UnityEngine.Events;
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory System/Inventory")]
 public class InventoryObject : ScriptableObject
 {
-    public List<InventorySlot> Container = new List<InventorySlot>();
+    public List<InventorySlot> Container { get { return container; } private set { container = value; } }
+    
+    [SerializeField]
+    private List<InventorySlot> container = new List<InventorySlot>();
 
     public FloatVariable currentCash;
 
     public delegate void OnItemChanged();
     public OnItemChanged OnItemChangedCallback;
 
-    public FloatVariable MinSize;
+    public int MinSize { get {return minsize; } private set { minsize = value; } }
+
+    [SerializeField]
+    private int minsize;
+
     public FloatVariable InvSize;
 
     public bool addItem(ItemObject _item, int _amount)
