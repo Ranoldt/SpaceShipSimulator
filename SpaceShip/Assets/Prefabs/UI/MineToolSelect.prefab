@@ -16,6 +16,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2920408538796931079, guid: 279c98682d0c2734586e71200374cd96, type: 3}
+      propertyPath: _componentList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2920408538796931079, guid: 279c98682d0c2734586e71200374cd96, type: 3}
       propertyPath: componentList.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: 95c616d37411b174cb016712d366c1a4, type: 2}
@@ -23,12 +27,24 @@ PrefabInstance:
       propertyPath: componentList.Array.data[1]
       value: 
       objectReference: {fileID: 11400000, guid: 938d7d7ef72304143bdf32858d46f3cd, type: 2}
+    - target: {fileID: 2920408538796931079, guid: 279c98682d0c2734586e71200374cd96, type: 3}
+      propertyPath: _componentList.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 938d7d7ef72304143bdf32858d46f3cd, type: 2}
+    - target: {fileID: 2920408538796931079, guid: 279c98682d0c2734586e71200374cd96, type: 3}
+      propertyPath: _componentList.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 95c616d37411b174cb016712d366c1a4, type: 2}
     - target: {fileID: 3296596138534235357, guid: 279c98682d0c2734586e71200374cd96, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3296596138534235357, guid: 279c98682d0c2734586e71200374cd96, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3296596138534235357, guid: 279c98682d0c2734586e71200374cd96, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3296596138534235357, guid: 279c98682d0c2734586e71200374cd96, type: 3}
@@ -37,6 +53,10 @@ PrefabInstance:
       objectReference: {fileID: 3808639866924919910}
     - target: {fileID: 3296596138534235357, guid: 279c98682d0c2734586e71200374cd96, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3296596138534235357, guid: 279c98682d0c2734586e71200374cd96, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3296596138534235357, guid: 279c98682d0c2734586e71200374cd96, type: 3}
@@ -44,19 +64,35 @@ PrefabInstance:
       value: onLeftButtonClick
       objectReference: {fileID: 0}
     - target: {fileID: 3296596138534235357, guid: 279c98682d0c2734586e71200374cd96, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: changeMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 3296596138534235357, guid: 279c98682d0c2734586e71200374cd96, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: SelectedPart, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3296596138534235357, guid: 279c98682d0c2734586e71200374cd96, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UIShipDisplay, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3296596138534235357, guid: 279c98682d0c2734586e71200374cd96, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 3296596138534235357, guid: 279c98682d0c2734586e71200374cd96, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3296596138840803357, guid: 279c98682d0c2734586e71200374cd96, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3296596138840803357, guid: 279c98682d0c2734586e71200374cd96, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3296596138840803357, guid: 279c98682d0c2734586e71200374cd96, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3296596138840803357, guid: 279c98682d0c2734586e71200374cd96, type: 3}
@@ -68,15 +104,31 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3296596138840803357, guid: 279c98682d0c2734586e71200374cd96, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3296596138840803357, guid: 279c98682d0c2734586e71200374cd96, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: onRightButtonClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 3296596138840803357, guid: 279c98682d0c2734586e71200374cd96, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: changeMesh
       objectReference: {fileID: 0}
     - target: {fileID: 3296596138840803357, guid: 279c98682d0c2734586e71200374cd96, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: SelectedPart, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3296596138840803357, guid: 279c98682d0c2734586e71200374cd96, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UIShipDisplay, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3296596138840803357, guid: 279c98682d0c2734586e71200374cd96, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3296596138840803357, guid: 279c98682d0c2734586e71200374cd96, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4301733350506968825, guid: 279c98682d0c2734586e71200374cd96, type: 3}
@@ -165,7 +217,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7291841941629615864, guid: 279c98682d0c2734586e71200374cd96, type: 3}
       propertyPath: m_Name
-      value: UI for viewing parts
+      value: Mine Select
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 279c98682d0c2734586e71200374cd96, type: 3}

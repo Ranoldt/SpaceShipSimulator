@@ -1466,64 +1466,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3594925184713661564, guid: 2259329eee56be34cb1584617f6d5a44, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3594925184713661564, guid: 2259329eee56be34cb1584617f6d5a44, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3594925184713661564, guid: 2259329eee56be34cb1584617f6d5a44, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1789489729}
-    - target: {fileID: 3594925184713661564, guid: 2259329eee56be34cb1584617f6d5a44, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3594925184713661564, guid: 2259329eee56be34cb1584617f6d5a44, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: changeMesh
-      objectReference: {fileID: 0}
-    - target: {fileID: 3594925184713661564, guid: 2259329eee56be34cb1584617f6d5a44, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: UIShipDisplay, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3594925184713661564, guid: 2259329eee56be34cb1584617f6d5a44, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 3594925185002682556, guid: 2259329eee56be34cb1584617f6d5a44, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3594925185002682556, guid: 2259329eee56be34cb1584617f6d5a44, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3594925185002682556, guid: 2259329eee56be34cb1584617f6d5a44, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1789489729}
     - target: {fileID: 3594925185002682556, guid: 2259329eee56be34cb1584617f6d5a44, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3594925185002682556, guid: 2259329eee56be34cb1584617f6d5a44, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: changeMesh
-      objectReference: {fileID: 0}
-    - target: {fileID: 3594925185002682556, guid: 2259329eee56be34cb1584617f6d5a44, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: UIShipDisplay, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3594925185002682556, guid: 2259329eee56be34cb1584617f6d5a44, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1789489729}
     - target: {fileID: 8749845693932366489, guid: 2259329eee56be34cb1584617f6d5a44, type: 3}
       propertyPath: m_Name
-      value: UI for viewing parts
+      value: Mine Select
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2259329eee56be34cb1584617f6d5a44, type: 3}
@@ -1536,7 +1488,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1360522732626620675, guid: 5bfb8fcf0d2df8c479a76d5cabb8773a, type: 3}
       propertyPath: m_Name
-      value: UI for viewing parts
+      value: Boost Select
       objectReference: {fileID: 0}
     - target: {fileID: 5504115746105866498, guid: 5bfb8fcf0d2df8c479a76d5cabb8773a, type: 3}
       propertyPath: m_Pivot.x

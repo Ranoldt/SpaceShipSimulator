@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6d41584e1fe84a4c9d6eae9c33085e9, type: 3}
   m_Name: Balanced Bullet
   m_EditorClassIdentifier: 
-  shootingMask:
+  _shootingMask:
     serializedVersion: 2
     m_Bits: 64
-  laserRange: 100
-  laserHitParticles: {fileID: 3897070527687402240, guid: 1bf4fc6a1da5fa34a9f9f39f368cff84, type: 3}
-  miningPower: 25
-  laserHeatThreshold: 8
-  laserHeatRate: 2
-  laserCoolRate: 2.5
+  _laserRange: 100
+  _laserHitParticles: {fileID: 0}
+  _miningPower: 25
+  _laserHeatThreshold: 10
+  _laserHeatRate: 3
+  _laserCoolRate: 2
   minepowerlevel: {fileID: 11400000, guid: 03d3fbcd4f7d87245be3b6b464cb5a4c, type: 2}
   bullet: {fileID: 7706028373671809231, guid: 6cd1b54c4255d2c4d924d8871dea488a, type: 3}
