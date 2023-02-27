@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6d41584e1fe84a4c9d6eae9c33085e9, type: 3}
+  m_Name: First Bullet
+  m_EditorClassIdentifier: 
+  _mineAmmoConfig: {fileID: 11400000, guid: 52d233c73912cd24aa4637d29c2ee9c8, type: 2}
+  _shootingMask:
+    serializedVersion: 2
+    m_Bits: 64
+  _laserRange: 100
+  _laserHitParticles: {fileID: 0}
+  _miningPower: 25
+  minepowerlevel: {fileID: 11400000, guid: 03d3fbcd4f7d87245be3b6b464cb5a4c, type: 2}
+  mineType: 1
+  bullet: {fileID: 7706028373671809231, guid: 6cd1b54c4255d2c4d924d8871dea488a, type: 3}
+  shootEvent: {fileID: 11400000, guid: eaf602d386f1a5d4ea21ccf2ab14b7c0, type: 2}
+  _interval: 0.5

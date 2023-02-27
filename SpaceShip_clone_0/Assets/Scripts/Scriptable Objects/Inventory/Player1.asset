@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fe3a76bf42dae44f915422c112260cc, type: 3}
+  m_Name: Player1
+  m_EditorClassIdentifier: 
+  container: []
+  currentCash: {fileID: 11400000, guid: a91376effc0aca54099dc2c8b1256e27, type: 2}
+  minsize: 4
+  InvSize: {fileID: 11400000, guid: f1e2af05e23d3204092e4c78db1560be, type: 2}
