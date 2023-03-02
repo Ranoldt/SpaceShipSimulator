@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(fileName = "New Beam", menuName = "Agents/Parts/Mine/Beam")]
-
+//[CreateAssetMenu(fileName = "New Beam", menuName = "Agents/Parts/Mine/Beam")]
+//UNUSED
 public class BeamType : MineObjects, IShoot
 {
     public Event initializationEvent;
@@ -37,7 +37,7 @@ public class BeamType : MineObjects, IShoot
             IShootable target = Hitinfo.transform.GetComponent<IShootable>();
             if (target != null)
             {
-                target.damage(miningPower + (1.5f * minepowerlevel.FloatValue));//total power of laser
+                target.damage(miningPower);//total power of laser
             }
             Instantiate(laserHitParticles, Hitinfo.point, Quaternion.LookRotation(Hitinfo.normal));
 

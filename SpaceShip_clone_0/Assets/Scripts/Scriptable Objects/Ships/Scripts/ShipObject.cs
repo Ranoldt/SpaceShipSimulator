@@ -5,15 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Ship", menuName = "Agents/Ship")]
 public class ShipObject : ShipDataObject
 {
-    public InventoryObject inv { get { return _inv; } private set { _inv = value; } }
-    [SerializeField]
-    private InventoryObject _inv;
+    public MineObjects mineTool;
 
-
-
-    //Left public because of character customization
-    public MineObjects miningTool;
-
-    public BoostComponent boost;
-
+    public BoostComponent boostObject;
 }

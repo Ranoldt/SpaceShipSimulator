@@ -7,17 +7,11 @@ public class LaserOrigin : MonoBehaviour
     private MineObjects mineTool;
     private LineRenderer beamFab;
     private Transform[] origins;
-    // Start is called before the first frame update
-    void Start()
-    {
-        //this is to make sure every system changes accordingly when SpaceShip's shipdata changes.
-        mineTool = this.gameObject.GetComponentInParent<SpaceShip>().shipdata.miningTool;
+    private MineToolFiring toolFiring;
 
-        if (mineTool.GetType() == typeof(BeamType))
-        {
-            var tool = mineTool as BeamType;
-            tool.initializationEvent.Raise();
-        }
+    private void Start()
+    {
+        toolFiring = GetComponentInParent<MineToolFiring>();
     }
 
     //runs whenever a new beam object is enabled.
@@ -25,21 +19,25 @@ public class LaserOrigin : MonoBehaviour
     //It also stores references to each beam inside a list created in the beam scriptable object
     public void beamInitialization()
     {
-        var tool = mineTool as BeamType;
-        beamFab = tool.beam;
+        MineObjects tool = GetComponentInParent<SpaceShip>().inv.equippedMineTool;
+        beamFab = tool.fab.GetComponent<LineRenderer>();
 
         //clear beams
-        tool.beams.Clear();
+        toolFiring.beams.Clear();
 
         origins = this.gameObject.GetComponentsInChildren<Transform>();
 
+        if (toolFiring.beams.Count != 0)
+        {
+            toolFiring.beams.Clear(); //when initializing, make sure the list is empty before populating
+        }
         //Instantiate beam instances
         foreach (Transform origin in origins)
         {
             //if there are already laser prefabs instantiated, then destroy them before
             //initializing. Edge cases yahoo
             var leftoverBeam = origin.gameObject.GetComponent<LineRenderer>();
-            if(leftoverBeam != null)
+            if (leftoverBeam != null)
             {
                 Destroy(leftoverBeam.gameObject);
             }
@@ -47,7 +45,7 @@ public class LaserOrigin : MonoBehaviour
             var beam = Instantiate(beamFab, 
                 origin);
 
-            tool.beams.Add(beam);
+            toolFiring.beams.Add(beam);
         }
 
     }

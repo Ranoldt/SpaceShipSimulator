@@ -39,7 +39,7 @@ public class WeaponsBehaviorTEST : MonoBehaviour
     private AmmoFiringLogic al;
     private void Start()
     {
-        tool = GetComponent<SpaceShip>().shipdata.miningTool;
+        //tool = GetComponent<SpaceShip>().shipdata.;
 
         al = GetComponent<AmmoFiringLogic>();
     }
@@ -47,11 +47,11 @@ public class WeaponsBehaviorTEST : MonoBehaviour
 {
     if (held&& al.canFire)
     {
-            tool._Shoot(shooters, OriginMiddle);
+            //tool._Shoot(shooters, OriginMiddle);
     }
     else if (!held)
     {
-            tool._OnShootRelease();
+            //tool._OnShootRelease();
     }
 }
 //switch the status of held based on whether the button is being pressed or released. OnAttack is called every time the button is pressed and every time it is released, the if statements are what determine which of those two is currently happening.

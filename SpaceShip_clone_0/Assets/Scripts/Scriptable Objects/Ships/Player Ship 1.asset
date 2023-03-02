@@ -18,6 +18,5 @@ MonoBehaviour:
   _thrust: 500
   _upThrust: 500
   _strafeThrust: 300
-  _inv: {fileID: 11400000, guid: 0ec0012b9fa22a048a3cf80630914ee4, type: 2}
-  miningTool: {fileID: 11400000, guid: 938d7d7ef72304143bdf32858d46f3cd, type: 2}
+  miningTool: {fileID: 11400000, guid: 872fe82dfc1adba4ea0621acc4973a78, type: 2}
   boost: {fileID: 11400000, guid: 60153f98d1ddbdd4f889358a7349db6d, type: 2}

@@ -9,9 +9,8 @@ public class BoostBar : MonoBehaviour
     //behavior that adjusts a slider showing how much boost you have left
 
     [SerializeField]
-    private FloatVariable boostMax;
-    [SerializeField]
-    private FloatVariable BoostLeft;
+    private PlayerManager manager;
+
     [SerializeField]
     private Slider boostBar;
 
@@ -32,6 +31,6 @@ public class BoostBar : MonoBehaviour
 
     private void UpdateUI()
     {
-        boostBar.value = BoostLeft.FloatValue / boostMax.FloatValue; //value made as a percentage so you dont have to adjust the values every time boostTime changes
+        boostBar.value = manager.boostLeft / manager.boostCapacity; //value made as a percentage so you dont have to adjust the values every time boostTime changes
     }
 }

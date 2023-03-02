@@ -20,7 +20,7 @@ public class BulletBehavior : MonoBehaviour
     private void Start()
     {
         rb = this.GetComponent<Rigidbody>();
-        minePower = GetComponentInParent<SpaceShip>().shipdata.miningTool.miningPower;
+        minePower = GetComponentInParent<SpaceShip>().inv.equippedMineTool.miningPower;
     }
 
     private void Update()

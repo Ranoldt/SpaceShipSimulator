@@ -5,13 +5,13 @@ using UnityEngine.InputSystem;
 
 public class AmmoFiringLogic : MonoBehaviour
 {
+    [SerializeField]
+    private Event BeamInturruption;
+
     private MineAmmoConfig ammoConfig;
     private MineObjects minetool;
 
-    [SerializeField]
-    private FloatVariable currentAmmoAmount;
-    [SerializeField]
-    private FloatVariable maxAmmoAmount;
+    private PlayerManager manager;
     public bool canFire { get; private set; }
 
     private float lastShootTime;
@@ -20,10 +20,13 @@ public class AmmoFiringLogic : MonoBehaviour
     void Start()
     {
         canFire = true;
-        ammoConfig = GetComponent<SpaceShip>().shipdata.miningTool.mineAmmoConfig;
-        currentAmmoAmount.SetValue(ammoConfig.defaultCapacity);
-        maxAmmoAmount.SetValue(ammoConfig.defaultCapacity);
-        minetool = GetComponent<SpaceShip>().shipdata.miningTool;
+        minetool = GetComponent<SpaceShip>().inv.equippedMineTool;
+        ammoConfig = minetool.mineAmmoConfig;
+
+        manager = GetComponent<SpaceShip>().playerData;
+
+        manager.ammoCapacity = ammoConfig.defaultCapacity;
+        manager.ammoLeft = manager.ammoCapacity;
     }
 
     private void Update()
@@ -35,34 +38,33 @@ public class AmmoFiringLogic : MonoBehaviour
                 regenAmmo();
             }
         }
-        if (currentAmmoAmount.FloatValue > ammoConfig.defaultCapacity)
+        if (manager.ammoLeft > ammoConfig.defaultCapacity)
         {
-            currentAmmoAmount.SetValue(ammoConfig.defaultCapacity);
+            manager.ammoLeft = ammoConfig.defaultCapacity;
         }
     }
 
     public void decrementAmmo()
     {
         lastShootTime = Time.time;
-        currentAmmoAmount.DecrementValue(ammoConfig.ammoUsedPerShot);
-        if (currentAmmoAmount.FloatValue <= 0)
+        manager.ammoLeft -= ammoConfig.ammoUsedPerShot;
+        if (manager.ammoLeft <= 0)
         {
             canFire = false;
-            if(minetool is BeamType)
+            if(minetool.mineType == mineToolType.beam)
             {
-                var tool = minetool as BeamType;
-                tool.OnShootRelease();
+                BeamInturruption.Raise();
             }
         }
     }
 
     public void regenAmmo()
     {
-        currentAmmoAmount.IncrementValue(ammoConfig.regenRate);
+        manager.ammoLeft += ammoConfig.regenRate;
 
         if (!canFire)
         {
-            if (currentAmmoAmount.FloatValue >= maxAmmoAmount.FloatValue)
+            if (manager.ammoLeft >= manager.ammoCapacity)
             {
                 canFire = true;
             }

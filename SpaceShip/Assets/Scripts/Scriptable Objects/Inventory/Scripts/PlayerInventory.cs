@@ -8,15 +8,22 @@ public class PlayerInventory : MonoBehaviour
 
     /// <summary>
     /// This script is only responsible for adding new items in the inventory on collision with an item object.
-    /// The actual list logic is stored in the InventoryObject, and the UI component is dealt with in the Inventory Menu script
     /// </summary>
 
-    private InventoryObject inventory;
+    private InventoryManager inventory;
 
     private void Start()
     {
-        inventory = gameObject.GetComponent<SpaceShip>().shipdata.inv;
-        inventory.InvSize.SetValue(inventory.MinSize); //initialize minimum inventory size
+        inventory = GetComponent<SpaceShip>().inv;
+
+        //initialize the player's component inventories
+        inventory.miningToolContainer.Add(inventory.equippedMineTool);
+        if (inventory.OnMineToolBoughtCallback != null)
+            inventory.OnMineToolBoughtCallback.Invoke();
+
+        inventory.boostContainer.Add(inventory.equippedBoost);
+        if (inventory.OnBoostBoughtCallback != null)
+            inventory.OnBoostBoughtCallback.Invoke();
     }
 
     public void OnTriggerEnter(Collider other)
@@ -37,6 +44,7 @@ public class PlayerInventory : MonoBehaviour
     private void OnApplicationQuit()
     {
         inventory.Container.Clear();
-        inventory.currentCash.SetValue(0);
+        inventory.miningToolContainer.Clear();
+        inventory.boostContainer.Clear();
     }
 }

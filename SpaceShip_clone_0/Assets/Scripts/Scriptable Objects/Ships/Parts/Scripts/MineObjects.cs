@@ -1,14 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum mineToolType
 {
     beam,
     bullet
 }
+
+[CreateAssetMenu(fileName = "New Mine Object", menuName = "Agents/Parts/Mine/Tool")]
 public class MineObjects : ShipPart
 {
+    public GameObject fab { get { return _fab; } private set { _fab = value; } }
+    [SerializeField]
+    private GameObject _fab;
     public MineAmmoConfig mineAmmoConfig { get { return _mineAmmoConfig;} private set { _mineAmmoConfig = value; } }
     [SerializeField]
     private MineAmmoConfig _mineAmmoConfig;
@@ -29,43 +35,10 @@ public class MineObjects : ShipPart
     [SerializeField]
     private float _miningPower = 1f;
 
-    //public float laserHeatThreshold { get { return _laserHeatThreshold; } private set { _laserHeatThreshold = value; } }
-    //[SerializeField]
-    //private float _laserHeatThreshold = 2f;
-
-    //public float laserHeatRate { get { return _laserHeatRate; } private set { _laserHeatRate = value; } }
-    //[SerializeField] 
-    //private float _laserHeatRate = 0.25f;
-
-    //public float laserCoolRate { get { return _laserCoolRate; } private set { _laserCoolRate = value; } }
-    //[SerializeField]
-    //private float _laserCoolRate = 0.5f;
-
-    public FloatVariable minepowerlevel;
+    public int powerLevelCapacity { get { return _powerLevelCapacity; } private set { _powerLevelCapacity = value; } }
+    [SerializeField]
+    private int _powerLevelCapacity;
 
     public mineToolType mineType;
-
-    public void _Shoot(Transform[] origin, Transform aimDirection)
-    {
-        if(this is BeamType)
-        {
-            (this as BeamType).Shoot(origin, aimDirection);
-        }
-        if (this is BulletType)
-        {
-            (this as BulletType).Shoot(origin, aimDirection);
-        }
-    }
-    public void _OnShootRelease()
-    {
-        if (this is BeamType)
-        {
-            (this as BeamType).OnShootRelease();
-        }
-        if (this is BulletType)
-        {
-            (this as BulletType).OnShootRelease();
-        }
-    }
 
 }
