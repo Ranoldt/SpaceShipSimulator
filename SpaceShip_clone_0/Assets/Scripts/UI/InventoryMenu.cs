@@ -22,10 +22,7 @@ public class InventoryMenu : MonoBehaviour
     private GameObject slot;
 
     [SerializeField]
-    private FloatVariable invSize;
-
-    [SerializeField]
-    private InventoryObject inventoryData;
+    private InventoryManager inventoryData;
 
     private Slot[] slots;
 
@@ -40,7 +37,7 @@ public class InventoryMenu : MonoBehaviour
 
     private void ConstructUI()
     {
-        for(int i = 0; i < invSize.FloatValue; i++)
+        for(int i = 0; i < inventoryData.InvSize; i++)
         {
             var spawnedSlot = Instantiate(slot);
             spawnedSlot.transform.SetParent(this.gameObject.transform.GetChild(0).transform, false); 

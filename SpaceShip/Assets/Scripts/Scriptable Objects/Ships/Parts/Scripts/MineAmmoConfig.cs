@@ -19,6 +19,10 @@ public class MineAmmoConfig : ScriptableObject
     public float ammoUsedPerShot { get { return _ammoUsedPerShot; } private set { _ammoUsedPerShot = value; } }
     [SerializeField]
     private float _ammoUsedPerShot;
+
+    public float shootingInterval { get { return _shootingInterval; } private set { _shootingInterval = value; } }
+    [SerializeField]
+    private float _shootingInterval;
 }
 
 

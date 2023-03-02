@@ -6,10 +6,7 @@ using UnityEngine.UI;
 public class HeatBar : MonoBehaviour
 {
     [SerializeField]
-    private FloatVariable HeatValue;
-
-    [SerializeField]
-    private FloatVariable HeatMax;
+    private PlayerManager player;
 
     [SerializeField]
     private Slider Bar;
@@ -17,6 +14,6 @@ public class HeatBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Bar.value = (HeatMax.FloatValue-HeatValue.FloatValue) / HeatMax.FloatValue;
+        Bar.value = (player.ammoCapacity-player.ammoLeft) / player.ammoCapacity;
     }
 }

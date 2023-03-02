@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(fileName = "New Bullet", menuName = "Agents/Parts/Mine/Bullet")]
+//[CreateAssetMenu(fileName = "New Bullet", menuName = "Agents/Parts/Mine/Bullet")]
+//UNUSED
 public class BulletType : MineObjects, IShoot
 {
     /// <summary>

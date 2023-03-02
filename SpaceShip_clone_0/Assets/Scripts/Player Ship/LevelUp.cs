@@ -28,7 +28,7 @@ public class LevelUp : MonoBehaviour
     private void Start()
     {
         //initialize data 
-        boostdata = gameObject.GetComponent<SpaceShip>().shipdata.boost;
+        //boostdata = gameObject.GetComponent<SpaceShip>().shipdata.boost;
 
         //initialize levels
         minePowerLevel.SetValue(1);

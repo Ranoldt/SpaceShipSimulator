@@ -12,6 +12,10 @@ public class SpaceShip : MonoBehaviour
     //this is so that we can easily reference the components of the ship
     //which is necessary for a customizable asset
 
+    public InventoryManager inv;
+
+    public PlayerManager playerData;
+
 
     Rigidbody rb;
 

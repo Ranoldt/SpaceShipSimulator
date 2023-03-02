@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: MyFirstHeatBeam
   m_EditorClassIdentifier: 
   _defaultCapacity: 20
-  _regenRate: 0.25
+  _regenRate: 0.1
   _regenInterval: 2
   _ammoUsedPerShot: 0.1
+  _shootingInterval: 0.25

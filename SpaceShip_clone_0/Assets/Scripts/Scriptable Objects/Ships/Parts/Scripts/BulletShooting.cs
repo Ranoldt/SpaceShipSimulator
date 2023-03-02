@@ -47,7 +47,7 @@ public class BulletShooting : MonoBehaviour
     private FloatVariable LaserHeatThreshold;
     private void Awake()
     {
-        beamdata = gameObject.GetComponent<SpaceShip>().shipdata.miningTool; //access player ship data's mining tool component
+        //beamdata = gameObject.GetComponent<SpaceShip>().shipdata.miningTool; //access player ship data's mining tool component
         // The component is self contained within the prefab- there are no unnecessary dependencies.
 
         //LaserHeatThreshold.SetValue(beamdata.laserHeatThreshold); //initialize the float variable for UI to see the value
