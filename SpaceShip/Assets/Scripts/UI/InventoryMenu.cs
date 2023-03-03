@@ -21,8 +21,7 @@ public class InventoryMenu : MonoBehaviour
     [SerializeField]
     private GameObject slot;
 
-    [SerializeField]
-    private InventoryManager inventoryData;
+    private InventoryManager inventoryData { get { return this.gameObject.GetComponentInParent<UIManager>().inv; } }
 
     private Slot[] slots;
 
@@ -64,7 +63,7 @@ public class InventoryMenu : MonoBehaviour
     }
 
 
-    public void InvToggle(InputAction.CallbackContext context)
+    public void InvToggle()
     {
         if (invUi.activeSelf)
         {

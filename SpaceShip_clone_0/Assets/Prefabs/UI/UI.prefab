@@ -583,8 +583,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3f845e253411547a5811c520964880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HeatValue: {fileID: 11400000, guid: 7d622d2f6c6780541b1250d23a87e929, type: 2}
-  HeatMax: {fileID: 11400000, guid: db20cf6fb4cf8d14b8ca0e3852b43a5e, type: 2}
   Bar: {fileID: 5157351973745544369}
 --- !u!1 &5157351974009652766
 GameObject:
@@ -1033,7 +1031,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moneyText: {fileID: 5157351974563465672}
-  moneyAmount: {fileID: 11400000, guid: a91376effc0aca54099dc2c8b1256e27, type: 2}
 --- !u!1 &5157351974607645877
 GameObject:
   m_ObjectHideFlags: 0
@@ -1174,8 +1171,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84a335754dda5bb4a8a71de5ff3c0022, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boostMax: {fileID: 11400000, guid: e57b2059dfd0b7945aa967f681c83472, type: 2}
-  BoostLeft: {fileID: 11400000, guid: dae85d590de0b4649842cebcd2517d44, type: 2}
   boostBar: {fileID: 5157351974710602853}
 --- !u!1 &5157351974735186170
 GameObject:
@@ -1342,6 +1337,7 @@ GameObject:
   - component: {fileID: 5157351974930260816}
   - component: {fileID: 5157351974930260817}
   - component: {fileID: 5157351974930260813}
+  - component: {fileID: 949626034751929880}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -1384,16 +1380,16 @@ Canvas:
   m_GameObject: {fileID: 5157351974930260823}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 0.5
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
+  m_SortingLayerID: 468929333
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &5157351974930260816
@@ -1449,6 +1445,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 5157351975390852847}
+--- !u!114 &949626034751929880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5157351974930260823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d79027513480e48a6a4cb11162f415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inv: {fileID: 0}
+  player: {fileID: 0}
 --- !u!1 &5157351975057660097
 GameObject:
   m_ObjectHideFlags: 0

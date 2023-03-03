@@ -58,6 +58,10 @@ public class MineToolFiring : MonoBehaviour
             {
                 OnBeamRelease();
             }
+            else
+            {
+                OnBeamRelease();
+            }
         }
         else if(tool.mineType == mineToolType.bullet)
         {

@@ -8,8 +8,7 @@ public class BoostBar : MonoBehaviour
 {
     //behavior that adjusts a slider showing how much boost you have left
 
-    [SerializeField]
-    private PlayerManager manager;
+    private PlayerManager manager { get { return this.gameObject.GetComponentInParent<UIManager>().player; } }
 
     [SerializeField]
     private Slider boostBar;

@@ -13,6 +13,9 @@ public class ShipBuilderManager : MonoBehaviour
     private SelectedPart boostPart;
 
     [SerializeField]
+    private ModelSelect modelPart;
+
+    [SerializeField]
     private TMP_Text playerNumberText;
 
     [SerializeField]
@@ -22,7 +25,7 @@ public class ShipBuilderManager : MonoBehaviour
     private void Awake()
     {
         editedShip = GameManager.instance.playerShips[GameManager.instance.initializedPlayers];
-        playerNumberText.text = "Player " + GameManager.instance.initializedPlayers + 1.ToString();
+        playerNumberText.text = "Player " + (GameManager.instance.initializedPlayers + 1) .ToString();
     }
 
     //keep track of the initialized ships vs. the uninitialized ships
@@ -32,6 +35,7 @@ public class ShipBuilderManager : MonoBehaviour
     {
         editedShip.tool = minePart.shipComponent as MineObjects;
         editedShip.boost = boostPart.shipComponent as BoostComponent;
+        editedShip.model = modelPart.shipComponent.model;
 
         GameManager.instance.initializedPlayers += 1;
         if(GameManager.instance.initializedPlayers != GameManager.instance.numberofPlayers)
