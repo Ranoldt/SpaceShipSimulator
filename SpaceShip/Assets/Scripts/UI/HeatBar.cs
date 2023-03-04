@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class HeatBar : MonoBehaviour
 {
-    [SerializeField]
-    private PlayerManager player;
+    private PlayerManager player { get { return this.gameObject.GetComponentInParent<UIManager>().player; } }
 
     [SerializeField]
     private Slider Bar;

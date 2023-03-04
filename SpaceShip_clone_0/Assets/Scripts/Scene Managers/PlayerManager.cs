@@ -20,17 +20,4 @@ public class PlayerManager : MonoBehaviour
     //variables for mining tools
     public float ammoLeft;
     public float ammoCapacity; //updated whenever ammo capacity increases, or if you buy a new component
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 1034399873}
   - component: {fileID: 1034399874}
   - component: {fileID: 1034399875}
+  - component: {fileID: 1569294233}
   m_Layer: 8
   m_Name: LaserShip
   m_TagString: Player
@@ -60,6 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipdata: {fileID: 11400000, guid: 2e3f4712a33b93840aae40bc0034f3b8, type: 2}
   inv: {fileID: 0}
+  playerData: {fileID: 0}
 --- !u!54 &6525150598981605651
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -183,8 +185,8 @@ MonoBehaviour:
     m_ActionName: Ship/PitchYaw[/Mouse/delta]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: WeaponsBehaviorTEST, Assembly-CSharp
+      - m_Target: {fileID: 1034399875}
+        m_TargetAssemblyTypeName: MineToolFiring, Assembly-CSharp
         m_MethodName: OnShoot
         m_Mode: 0
         m_Arguments:
@@ -215,10 +217,10 @@ MonoBehaviour:
     m_ActionName: Ship/Boost[/Keyboard/leftShift]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: InventoryMenu, Assembly-CSharp
-        m_MethodName: InvToggle
-        m_Mode: 0
+      - m_Target: {fileID: 11400000, guid: d4ff541cbd825ce4e8eedc074362c873, type: 2}
+        m_TargetAssemblyTypeName: Event, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -246,8 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43a0a3b6bf6ec694da1f082ac8d63a54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boostMax: {fileID: 11400000, guid: e57b2059dfd0b7945aa967f681c83472, type: 2}
-  BoostCapacity: {fileID: 11400000, guid: dae85d590de0b4649842cebcd2517d44, type: 2}
+  boostInitializationEvent: {fileID: 11400000, guid: 45addd6fcfd41284ca909ad555c77e00, type: 2}
 --- !u!136 &6525150598981605644
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -303,8 +304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d667fd7f6613214e996dbb88be5ead1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentAmmoAmount: {fileID: 11400000, guid: 7d622d2f6c6780541b1250d23a87e929, type: 2}
-  maxAmmoAmount: {fileID: 11400000, guid: db20cf6fb4cf8d14b8ca0e3852b43a5e, type: 2}
+  BeamInturruption: {fileID: 11400000, guid: 29962947a2a0e4841a44ec10a99ff98f, type: 2}
 --- !u!114 &1034399874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,7 +350,35 @@ MonoBehaviour:
   shootEvent: {fileID: 11400000, guid: eaf602d386f1a5d4ea21ccf2ab14b7c0, type: 2}
   beamInitializationEvent: {fileID: 11400000, guid: 5b13244e0e69a2a4d86c7f8c91901bc6, type: 2}
   beams: []
-  bulletInitializationEvent: {fileID: 0}
+  bulletInitializationEvent: {fileID: 11400000, guid: 16d4faed4e589b4468ce0f68c3937ed7, type: 2}
+--- !u!114 &1569294233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6525150597555728878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26d2f49a2c10d3344ad28962d2dcabed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 45addd6fcfd41284ca909ad555c77e00, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6525150598981605645}
+        m_TargetAssemblyTypeName: Boost, Assembly-CSharp
+        m_MethodName: BoostInitialization
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6525150597586169750
 GameObject:
   m_ObjectHideFlags: 0

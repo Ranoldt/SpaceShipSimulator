@@ -5,30 +5,12 @@ using UnityEngine;
 public class UIShipDisplay : MonoBehaviour
 {
     [SerializeField]
-    private GameObject laserShip;
+    private MeshFilter shipMeshFilter;
 
     [SerializeField]
-    private GameObject bulletShip;
-
-    private Mesh laserMesh;
-    private Mesh bulletMesh;
-
-
-    private void Start()
-    {
-        laserMesh = laserShip.GetComponentInChildren<MeshFilter>().sharedMesh;
-        bulletMesh = bulletShip.GetComponentInChildren<MeshFilter>().sharedMesh;
-    }
-
+    private ModelSelect meshSelector;
     public void changeMesh()
     {
-        if (this.gameObject.GetComponent<MeshFilter>().sharedMesh == laserMesh)
-        {
-            this.gameObject.GetComponent<MeshFilter>().sharedMesh = bulletMesh;
-        }
-        else
-        {
-            this.gameObject.GetComponent<MeshFilter>().sharedMesh = laserMesh;
-        }
+        shipMeshFilter.mesh = meshSelector.shipComponent.model;
     }
 }

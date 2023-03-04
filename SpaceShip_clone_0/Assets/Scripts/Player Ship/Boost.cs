@@ -25,7 +25,7 @@ public class Boost : MonoBehaviour
     {
         rb = this.GetComponent<Rigidbody>();
         manager = GetComponent<SpaceShip>().playerData;
-        boostInitializationEvent.Raise();
+        BoostInitialization();
     }
 
     private void FixedUpdate()
@@ -68,6 +68,7 @@ public class Boost : MonoBehaviour
     {
         //get the equipped component
         boostdata = GetComponent<SpaceShip>().inv.equippedBoost;
+
         //populate runtime variables
         manager.boostCapacity = boostdata.boostTime;
         manager.boostLeft = manager.boostCapacity;
