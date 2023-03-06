@@ -6,9 +6,11 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 public class Boost : MonoBehaviour
 {
-    [SerializeField]
-    private Event boostInitializationEvent;
+    //[SerializeField]
+    //private Event boostInitializationEvent;
     //raised on start, as well as whenever boost components are equipped
+    [SerializeField]
+    private LevelUp level;
 
     private PlayerManager manager;
 
@@ -39,7 +41,7 @@ public class Boost : MonoBehaviour
         if (Time.time >= lastBoostTime + boostdata.boostRecoveryInterval && !isBoost)
         {
             manager.boostLeft += Time.deltaTime * boostdata.boostRecoveryRate;
-            manager.boostLeft =  Mathf.Clamp(manager.boostLeft, 0, boostdata.boostTime);
+            manager.boostLeft =  Mathf.Clamp(manager.boostLeft, 0, manager.boostCapacity);
         }
     }
 
@@ -47,7 +49,7 @@ public class Boost : MonoBehaviour
     {
         if(isBoost && manager.boostLeft > 0)
         {
-            rb.AddRelativeForce(Vector3.forward * boostdata.boostStrength * Time.deltaTime);
+            rb.AddRelativeForce(Vector3.forward * (boostdata.boostStrength + (1.25f * level.boostPowerLevel))* Time.deltaTime);
             manager.boostLeft -=  Time.fixedDeltaTime;
         }
     }

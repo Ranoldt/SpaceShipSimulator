@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4057098582458061192}
   - component: {fileID: 481708642924280902}
   m_Layer: 5
-  m_Name: Slot
+  m_Name: WeirdSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

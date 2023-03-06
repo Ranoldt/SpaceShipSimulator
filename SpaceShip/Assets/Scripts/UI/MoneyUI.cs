@@ -8,7 +8,8 @@ public class MoneyUI : MonoBehaviour
     [SerializeField]
     private TMP_Text moneyText;
 
-    private InventoryManager inv { get { return this.gameObject.GetComponentInParent<UIManager>().inv; } }
+    [SerializeField]
+    private InventoryManager inv;
 
     private int moneyAmount { get { return inv.currentCash; } }
     public void UpdateText()

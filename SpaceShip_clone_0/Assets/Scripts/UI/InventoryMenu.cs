@@ -14,56 +14,67 @@ using UnityEngine.InputSystem;
 
 public class InventoryMenu : MonoBehaviour
 {
-
     [SerializeField]
     private GameObject invUi;
 
     [SerializeField]
     private GameObject slot;
 
-    private InventoryManager inventoryData { get { return this.gameObject.GetComponentInParent<UIManager>().inv; } }
+    [SerializeField]
+    private InventoryManager inventoryData;
 
     private Slot[] slots;
+    private int slotIndex = 0;
 
 
     private void Start()
     {
-        ConstructUI();
+        for (int i = 0; i < inventoryData.InvSize; i++)
+            ConstructUI();
         UpdateUI(); //just making sure the UI's updated on start
         slots = invUi.GetComponentsInChildren<Slot>();
         inventoryData.OnItemChangedCallback += UpdateUI; //subscribe to an event set up in InventoryObject
     }
 
-    private void ConstructUI()
+    public void ConstructUI()
     {
-        for(int i = 0; i < inventoryData.InvSize; i++)
-        {
-            var spawnedSlot = Instantiate(slot);
-            spawnedSlot.transform.SetParent(this.gameObject.transform.GetChild(0).transform, false); 
-            //make the slot the child of the inventory panel
-        }
+        var spawnedSlot = Instantiate(slot);
+        spawnedSlot.transform.SetParent(this.gameObject.transform.GetChild(0).transform, false);
+        spawnedSlot.GetComponent<Slot>().setIndex(slotIndex);
+        slotIndex += 1;
+        //make the slot the child of the inventory panel
     }
 
     private void UpdateUI()
     {
         slots = invUi.GetComponentsInChildren<Slot>(); // remake the array because the contents of the Inv changes
         //read the inventory list and populate the next available slot if it sees a new object
+        foreach(Slot slot in slots)
+        {
+            slot.ClearSlot();
+        }
+        
         for (int i = 0; i < inventoryData.Container.Count; i++)
         {
             slots[i].AddItem(inventoryData.Container[i].item, inventoryData.Container[i].amount);
         }
-        if (inventoryData.Container.Count == 0)
-        {
-            for (int i = slots.Length - 1; i >= 0; i--)
-            {
-                slots[i].ClearSlot();
-            }
-        }
 
     }
 
+    public void UntoggleSelectibles()
+    {
+        foreach (Slot slot in slots)
+        {
+            var toggle = slot.gameObject.GetComponentInChildren<UnityEngine.UI.Toggle>();
+            if (toggle != null)
+            {
+                toggle.isOn = false;
+            }
+        }
+    }
 
-    public void InvToggle()
+
+    public void InvToggle(InputAction.CallbackContext context)
     {
         if (invUi.activeSelf)
         {

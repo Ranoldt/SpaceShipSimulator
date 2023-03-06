@@ -44,17 +44,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac373ac3ac205ab45bce3e5910d01230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pManager: {fileID: 6877706166258478030, guid: b9ff2d1868d06714c80dc61357c2710c, type: 3}
-  iManager: {fileID: 6695764264597339858, guid: 8a881003778654d4494afe9d85455cda, type: 3}
-  playerPrefab: {fileID: 6525150597555728878, guid: d8d46c4d9fc75b846a7485d3b4bd1b47, type: 3}
-  uiPrefab: {fileID: 5157351974930260823, guid: b034d275e9209e743b816cde53a4fb84, type: 3}
-  cameraPrefab: {fileID: 7732347283051547718, guid: ae056bc02883ce04c98c2c2a17afa94e, type: 3}
+  playerCamLayers:
+  - serializedVersion: 2
+    m_Bits: 1024
+  - serializedVersion: 2
+    m_Bits: 2048
+  playerPrefab: {fileID: 5799545902807377289, guid: e475cdceaf2ac564b83815f2d1c88080, type: 3}
   numberofPlayers: 1
   initializedPlayers: 0
   _playerShips:
-  - tool: {fileID: 0}
-    boost: {fileID: 0}
-    model: {fileID: 0}
-  - tool: {fileID: 0}
-    boost: {fileID: 0}
-    model: {fileID: 0}
+  - tool: {fileID: 11400000, guid: 872fe82dfc1adba4ea0621acc4973a78, type: 2}
+    boost: {fileID: 11400000, guid: 60153f98d1ddbdd4f889358a7349db6d, type: 2}
+    model: {fileID: 4300000, guid: 37c207c8cc5c148039684b9323528dba, type: 3}
+  - tool: {fileID: 11400000, guid: 872fe82dfc1adba4ea0621acc4973a78, type: 2}
+    boost: {fileID: 11400000, guid: 60153f98d1ddbdd4f889358a7349db6d, type: 2}
+    model: {fileID: 4300000, guid: d7fcbff04d2a74555be8772f47c0f0de, type: 3}

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LaserOrigin : MonoBehaviour
 {
+    private MineObjects tool;
     private LineRenderer beamFab;
     private Transform[] origins;
     private MineToolFiring toolFiring;
@@ -12,6 +13,14 @@ public class LaserOrigin : MonoBehaviour
     {
         toolFiring = GetComponentInParent<MineToolFiring>();
 
+    }
+    private void Start()
+    {
+        tool = GetComponentInParent<SpaceShip>().inv.equippedMineTool;
+        if (tool.mineType == mineToolType.beam)
+        {
+            beamInitialization();
+        }
     }
 
     //runs whenever a new beam object is enabled.

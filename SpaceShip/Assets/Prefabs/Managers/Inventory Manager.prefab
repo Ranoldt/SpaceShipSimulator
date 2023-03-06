@@ -44,8 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41d2c09ac7a535040b3ab6c738f07557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerManager: {fileID: 0}
   Container: []
   miningToolContainer: []
   boostContainer: []
+  equippedMineTool: {fileID: 0}
+  equippedBoost: {fileID: 0}
   currentCash: 0
   InvSize: 4

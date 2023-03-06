@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -9,35 +10,31 @@ public class PauseMenu : MonoBehaviour
 
     public GameObject pauseMenuUI;
 
-    // Update is called once per frame
-    void Update()
+    public void Resume()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (GameIsPaused)
         {
-            if(GameIsPaused)
-            {
-                Resume();
-
-            }
-            else
-            {
-                Pause();
-            }
+            pauseMenuUI.SetActive(false);
+            Time.timeScale = 1f;
+            GameIsPaused = false;
         }
     }
 
-    public void Resume()
+    public void Pause(InputAction.CallbackContext context)
     {
-        pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
-        GameIsPaused = false;
-    }
+        if (!GameIsPaused && context.performed)
+        {
+            pauseMenuUI.SetActive(true);
+            Time.timeScale = 0f;
+            GameIsPaused = true;
+        }
 
-    void Pause()
-    {
-        pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
-        GameIsPaused = true;
+        else if (GameIsPaused && context.performed)
+        {
+            pauseMenuUI.SetActive(false);
+            Time.timeScale = 1f;
+            GameIsPaused = false;
+        }
     }
 
     public void LoadMenu()

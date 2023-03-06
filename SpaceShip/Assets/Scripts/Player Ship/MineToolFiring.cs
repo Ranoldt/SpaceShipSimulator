@@ -20,43 +20,40 @@ public class MineToolFiring : MonoBehaviour
     [SerializeField]
     private Transform OriginMiddle;
 
-    [SerializeField]
-    private Event shootEvent;//a way to tell the ammo script to decrement ammo
-
-    //variables critical for beam firing
-    [SerializeField]
-    private Event beamInitializationEvent;
-
     public List<LineRenderer> beams = new List<LineRenderer>();
     //beams added here during initialization event
 
-    //variables for bullet firing
-    [SerializeField]
-    private Event bulletInitializationEvent;
     private float lastShootTime;
 
-    private AmmoFiringLogic al;
+    private MineAmmoConfig ammoConfig;
+    private MineObjects minetool;
 
-    private void Start()
+    private PlayerManager manager;
+    public bool canFire;
+
+    [SerializeField]
+    private LevelUp levels;
+
+    // Start is called before the first frame update
+    void Start()
     {
-        al = GetComponent<AmmoFiringLogic>();
-        if (tool.mineType == mineToolType.beam)
-        {
-            beamInitializationEvent.Raise();
-            //need to instantiate the line renderers when appropriate
-        }
+        canFire = true;
+        minetool = GetComponent<SpaceShip>().inv.equippedMineTool;
+        ammoConfig = minetool.mineAmmoConfig;
+
+        manager = GetComponent<SpaceShip>().playerData;
+
+        manager.ammoCapacity = ammoConfig.defaultCapacity;
+        manager.ammoLeft = manager.ammoCapacity;
     }
+
     void Update()
     {
         if (tool.mineType == mineToolType.beam)
         {
-            if (held && al.canFire)
+            if (held && canFire)
             {
                 BeamFire();
-            }
-            else if (!held)
-            {
-                OnBeamRelease();
             }
             else
             {
@@ -70,6 +67,8 @@ public class MineToolFiring : MonoBehaviour
                 BulletFire();
             }
         }
+
+        regenAmmo();
     }
 
     private void BeamFire()
@@ -82,8 +81,7 @@ public class MineToolFiring : MonoBehaviour
             IShootable target = Hitinfo.transform.GetComponent<IShootable>();
             if (target != null)
             {
-                //TODO: implement levels
-                target.damage(tool.miningPower);//total power of laser
+                target.damage(tool.miningPower + (1.5f* levels.minePowerLevel));//total power of laser
             }
             Instantiate(tool.laserHitParticles, Hitinfo.point, Quaternion.LookRotation(Hitinfo.normal));
 
@@ -102,10 +100,10 @@ public class MineToolFiring : MonoBehaviour
                 beam.SetPosition(1, new Vector3(0, 0, tool.laserRange));
             }
         }
-        shootEvent.Raise();
+        DecrementAmmo();
     }
 
-    public void OnBeamRelease() //called in ammofiringlogic
+    public void OnBeamRelease() 
     {
         foreach (LineRenderer beam in beams)
         {
@@ -122,9 +120,47 @@ public class MineToolFiring : MonoBehaviour
                 Instantiate(tool.fab, firePoint);
             }
             lastShootTime = Time.time;
-            shootEvent.Raise();
         }
     }
+
+    public void DecrementAmmo()
+    {
+        lastShootTime = Time.time;
+        manager.ammoLeft -= ammoConfig.ammoUsedPerShot;
+        if (manager.ammoLeft <= 0)
+        {
+            canFire = false;
+            if (minetool.mineType == mineToolType.beam)
+            {
+                OnBeamRelease(); //force inturrupt beam
+            }
+        }
+    }
+
+    public void regenAmmo()
+    {
+
+        if (Time.time >= lastShootTime + ammoConfig.regenInterval)
+        {
+            if (ammoConfig.regenRate != 0) //this is so we can have ammo types that don't regenerate run this code
+            {
+                manager.ammoLeft += ammoConfig.regenRate;
+            }
+        }
+        if (manager.ammoLeft > manager.ammoCapacity) //clamp max value
+        {
+            manager.ammoLeft = manager.ammoCapacity;
+        }
+
+        if (!canFire)
+        {
+            if (manager.ammoLeft >= manager.ammoCapacity)
+            {
+                canFire = true;
+            }
+        }
+    }
+
 
     //switch the status of held based on whether the button is being pressed or released. OnAttack is called every time the button is pressed and every time it is released, the if statements are what determine which of those two is currently happening.
     public void OnShoot(InputAction.CallbackContext ctx)

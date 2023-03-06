@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class HeatBar : MonoBehaviour
 {
-    private PlayerManager player { get { return this.gameObject.GetComponentInParent<UIManager>().player; } }
+    [SerializeField]
+    private PlayerManager player;
 
     [SerializeField]
     private Slider Bar;
@@ -13,6 +14,7 @@ public class HeatBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Bar.value = (player.ammoCapacity-player.ammoLeft) / player.ammoCapacity;
+        if(player.ammoCapacity != 0)
+            Bar.value = (player.ammoCapacity-player.ammoLeft) / player.ammoCapacity;
     }
 }

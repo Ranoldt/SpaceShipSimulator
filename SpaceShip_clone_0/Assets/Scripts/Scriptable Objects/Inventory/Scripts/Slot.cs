@@ -7,6 +7,10 @@ using TMPro;
 public class Slot : MonoBehaviour
 {
     //accessing the image components of the inventory slots
+    public int index { get { return _index; } private set { _index = value; } }
+    [SerializeField]
+    private int _index;
+
     [SerializeField]
     private Image _icon;
     public Image icon { get { return _icon; } private set { icon = value; } }
@@ -16,6 +20,10 @@ public class Slot : MonoBehaviour
 
     ItemObject item;
 
+    public void setIndex(int value)
+    {
+        _index = value;
+    }
     public void AddItem(ItemObject obj, int value)
     {
         item = obj;

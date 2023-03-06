@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAI : MonoBehaviour
+public class EnemyAI : MonoBehaviour, IShootable
 {
+    private float health;
     [SerializeField]
     public float movementSpeed = 10f;
     [SerializeField]
     public float rotationalDamp = 1f;
     private Rigidbody rb;
-    [SerializeField]
-    public Transform player;
 
     [SerializeField]
     private Transform target;
@@ -29,11 +28,40 @@ public class EnemyAI : MonoBehaviour
     bool canFire = true;
 
     [SerializeField]
+    private float power;
+
+    [SerializeField]
     private EnemyShip enemyShip = EnemyShip.chase;
+
+    private void Awake()
+    {
+        health = 100f;
+    }
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+    }
+    private void OnEnable()
+    {
+        int playertoTarget;
+        var players = GameManager.instance.players;
+        if (players.Count == 2)
+            playertoTarget = Random.Range(0, 2);//either 0 or 1
+        else
+        {
+            playertoTarget = 0;
+        }
+        target = players[playertoTarget].transform;
+    }
+
+    public void damage(float damage)
+    {
+        health -= damage;
+        if(health <= 0)
+        {
+            enemyShip = EnemyShip.die;
+        }
     }
 
     // Update is called once per frame
@@ -43,15 +71,18 @@ public class EnemyAI : MonoBehaviour
         {
             case EnemyShip.chase:
                 Chase();
-                if ((transform.position - player.position).magnitude <= 10)
+                if ((transform.position - target.position).magnitude <= 10)
                     enemyShip = EnemyShip.attack;
                 break;
             case EnemyShip.attack:
                 if (InFront() && HaveLineOfSight())
                     Attack();
-                if ((transform.position - player.position).magnitude > 10)
+                if ((transform.position - target.position).magnitude > 10)
                     enemyShip = EnemyShip.chase;
                     break;
+            case EnemyShip.die:
+                Destroy(this.gameObject);
+                break;
 
         }
       
@@ -59,7 +90,7 @@ public class EnemyAI : MonoBehaviour
 
     void Chase()
     {
-        Vector3 pos = player.position - transform.position;
+        Vector3 pos = target.position - transform.position;
         Quaternion rotation = Quaternion.LookRotation(pos);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationalDamp * Time.deltaTime);
         transform.position += transform.forward * movementSpeed * Time.deltaTime;
@@ -75,6 +106,11 @@ public class EnemyAI : MonoBehaviour
                     Vector3 localHitPosition = laser.transform.InverseTransformPoint(hit.point);
                     laser.SetPosition(1, localHitPosition);
                     laser.gameObject.SetActive(true);
+                    IShootable playerdmg = target.GetComponent<IShootable>();
+                    if(playerdmg != null)
+                    {
+                        playerdmg.damage(power);
+                    }
                     canFire = false;
                     Invoke("TurnOffLaser", LaserOffTime);
                     Invoke("CanFire", fireDelay);
@@ -127,7 +163,8 @@ public class EnemyAI : MonoBehaviour
     public enum EnemyShip
     {
         chase,
-        attack
+        attack,
+        die
     }
 
 }

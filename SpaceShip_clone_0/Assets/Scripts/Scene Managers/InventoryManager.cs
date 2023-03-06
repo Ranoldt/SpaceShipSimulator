@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,14 @@ using UnityEngine;
 /// </summary>
 public class InventoryManager : MonoBehaviour
 {
+    [SerializeField]
+    private PlayerManager playerManager;
+    private void Awake()
+    {
+      int ID = playerManager.playerID;
+      equippedMineTool = GameManager.instance.playerShips[ID].tool;
+      equippedBoost = GameManager.instance.playerShips[ID].boost;
+    }
     public List<InventorySlot> Container = new List<InventorySlot>();
 
     //inventory of components you have access to
@@ -67,19 +76,31 @@ public class InventoryManager : MonoBehaviour
         return false;
     }
 
-    public void sellItems()
+    public void sellItems() //sells selected items
     {
         for (int i = Container.Count - 1; i >= 0; i--)
         {
-            int stackPrice = Container[i].item.SellAmount * Container[i].amount;
-            currentCash += stackPrice;
-            Container.RemoveAt(i);
+            if (Container[i].selected)
+            {
+                Debug.Log("selling"+ Container[i].item.name);
+                int stackPrice = Container[i].item.SellAmount * Container[i].amount;
+                currentCash += stackPrice;
+                Container.RemoveAt(i);
+            }
 
         }
-
         if (OnItemChangedCallback != null)
-            OnItemChangedCallback.Invoke(); //tells inventory to update
+            OnItemChangedCallback.Invoke(); //tells inventory UI to update
 
+    }
+
+
+    public void selectItem(int ind)
+    {
+        if(ind <= Container.Count-1)
+        {
+            Container[ind].selected = !Container[ind].selected;
+        }
     }
 
 }
@@ -90,6 +111,7 @@ public class InventorySlot
 {
     public ItemObject item;
     public int amount;
+    public bool selected;
 
     public InventorySlot(ItemObject _item, int _amount)
     {

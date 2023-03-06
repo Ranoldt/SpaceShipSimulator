@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class BoostBar : MonoBehaviour
 {
     //behavior that adjusts a slider showing how much boost you have left
-
-    private PlayerManager manager { get { return this.gameObject.GetComponentInParent<UIManager>().player; } }
+    [SerializeField]
+    private PlayerManager manager;
 
     [SerializeField]
     private Slider boostBar;
@@ -25,7 +25,12 @@ public class BoostBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateUI();
+        if (manager.boostCapacity != 0)
+        {
+
+
+            UpdateUI();
+        }
     }
 
     private void UpdateUI()

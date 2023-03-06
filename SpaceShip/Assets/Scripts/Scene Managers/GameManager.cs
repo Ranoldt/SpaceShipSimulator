@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Cinemachine;
+using UnityEngine.InputSystem;
 /// <summary>
 /// Gets the number of players for the game and spawns prefabs and managers accordingly
 /// </summary>
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject pManager;
-    [SerializeField]
-    private GameObject iManager;
+    private List<LayerMask> playerCamLayers;
+
+    public List<PlayerInput> players;
+
     [SerializeField]
     private GameObject playerPrefab;
-    [SerializeField]
-    private GameObject cameraPrefab;
 
     //implements a singleton pattern with a dont destroy on load so we can
     //determine the amount of players in the main screen and then initialize the game scene accordingly
@@ -23,73 +23,38 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null && instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        else
+        if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(this.gameObject);
+            DontDestroyOnLoad(gameObject);
+
         }
-    }
-
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += SpawnPlayers;
-    }
-
-    private void SpawnPlayers(Scene scene, LoadSceneMode mode)
-    {
-        if (scene.name == "GampeplayScene")
+        else if (instance != this)
         {
-            for (int i = 0; i < numberofPlayers; i++)
-            {
-                var spawnedPManager = Instantiate(pManager);
-                var spawnedIManager = Instantiate(iManager);
-                var spawnedPlayer = Instantiate(playerPrefab);
-                var spawnedCamera = Instantiate(cameraPrefab);
-
-
-                //initialize UI
-                var spawnedUI = spawnedCamera.GetComponentInChildren<UIManager>();
-                spawnedUI.inv = spawnedIManager.GetComponent<InventoryManager>();
-                spawnedUI.player = spawnedPManager.GetComponent<PlayerManager>();
-
-
-                //initialize Camera
-                var cam = spawnedCamera.GetComponent<Camera>();
-                var vcam = cam.GetComponentInChildren<CinemachineVirtualCamera>();
-
-                vcam.LookAt = spawnedPlayer.gameObject.transform;
-                vcam.Follow = spawnedPlayer.gameObject.transform;
-
-
-                //initialize split screen
-                if(numberofPlayers == 2)
-                {
-                    if(i == 0)
-                    {
-                        cam.rect = new Rect(0, 0.5f, 1, 0.5f);
-                    }
-                    if(i == 1)
-                    {
-                        cam.rect = new Rect(0, 0, 1, 0.5f);
-                    }
-                }
-
-                //initialize manager
-                spawnedIManager.GetComponent<InventoryManager>().equippedMineTool = playerShips[i].tool;
-                spawnedIManager.GetComponent<InventoryManager>().equippedBoost = playerShips[i].boost;
-
-                //initialize SpaceShip script
-                spawnedPlayer.GetComponent<SpaceShip>().inv = spawnedIManager.GetComponent<InventoryManager>();
-                spawnedPlayer.GetComponent<SpaceShip>().playerData = spawnedPManager.GetComponent<PlayerManager>();
-
-                //initialize player model
-                spawnedPlayer.GetComponentInChildren<MeshFilter>().mesh = playerShips[i].model;
-            }
+            Destroy(instance.gameObject);
+            instance = this;
+            DontDestroyOnLoad(gameObject);
         }
+
+    }
+
+    public void AddPlayer(PlayerInput player)
+    {
+        var playerParent = player.transform.parent;
+        players.Add(player);
+        player.transform.parent.GetComponentInChildren<PlayerManager>().playerID = players.Count-1;
+
+
+
+        //next is setting up the cinemachine camera
+
+        //because the layer mask is a bit, we need to convert it to an int
+        int layer = (int)Mathf.Log(playerCamLayers[players.Count - 1].value, 2);
+
+        //set the camera to the layer
+        playerParent.GetComponentInChildren<CinemachineVirtualCamera>().gameObject.layer = layer;
+        //add the layer to the culling mask
+        playerParent.GetComponentInChildren<Camera>().cullingMask |= 1 << layer;
 
     }
 
@@ -100,11 +65,6 @@ public class GameManager : MonoBehaviour
     public shipConfiguration[] playerShips { get { return _playerShips; } private set { _playerShips = value; } }
     [SerializeField]
     private shipConfiguration[] _playerShips;//the scriptable object that defines each player's ship
-
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= SpawnPlayers;
-    }
 }
 
 [System.Serializable]

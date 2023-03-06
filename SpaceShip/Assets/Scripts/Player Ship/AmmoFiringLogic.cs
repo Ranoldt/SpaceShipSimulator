@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// MERGED WITH MINE TOOL FIRING BC THIS IS POINTLESSLY KEPT SEPARATE
+/// </summary>
 public class AmmoFiringLogic : MonoBehaviour
 {
-    [SerializeField]
-    private Event BeamInturruption;
-
     private MineAmmoConfig ammoConfig;
     private MineObjects minetool;
 
@@ -53,7 +53,6 @@ public class AmmoFiringLogic : MonoBehaviour
             canFire = false;
             if(minetool.mineType == mineToolType.beam)
             {
-                BeamInturruption.Raise();
             }
         }
     }
