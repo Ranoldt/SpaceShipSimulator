@@ -108,17 +108,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 6902249965210118472}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e99b67eebe409041b892f6dda61979e, type: 3}
+  m_Script: {fileID: 11500000, guid: 95218560bd845ee47829c92cc01025ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 5
+  Speed: 20
   Range: 10
   Head: {fileID: 6902249965464123742}
   barrel: {fileID: 6902249966203101503}
   Target: {fileID: 0}
   projectile: {fileID: 3471730155170125738, guid: f8493d778b272fc44b1e31c1a6c4b3be, type: 3}
-  howClose: 20
-  fireRate: 2
+  howClose: 30
+  fireRate: 1
   nextFire: 1
   turretShip: 0
 --- !u!1 &6902249965464123737
@@ -327,15 +327,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 6902249965713491186}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a71076ddc9baa12499d5b37e12fa602d, type: 3}
+  m_Script: {fileID: 11500000, guid: 33307bd670591c7479830b2e2f843e16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Head: {fileID: 6902249965464123742}
-  barrel: {fileID: 6902249966203101503}
+  barrel: {fileID: 0}
   Target: {fileID: 0}
   projectile: {fileID: 0}
-  howClose: 20
-  fireRate: 5
+  howClose: 0
+  fireRate: 0
   nextFire: 0
 --- !u!1 &6902249966203101502
 GameObject:
