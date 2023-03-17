@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Events;
 
 public class DialogueTextBox : MonoBehaviour
 {
+    [SerializeField]
+    private UnityEvent response;
+
     [SerializeField]
     private TextMeshProUGUI textComponent;
 
@@ -57,7 +61,7 @@ public class DialogueTextBox : MonoBehaviour
         else
         {
             //logic when the text ends
-            Debug.Log("text ended");
+            response.Invoke();
         }
     }
 
