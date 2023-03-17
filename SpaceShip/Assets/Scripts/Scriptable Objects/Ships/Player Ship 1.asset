@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9e61d1b30123d943adf8f5e38014ccd, type: 3}
   m_Name: Player Ship 1
   m_EditorClassIdentifier: 
-  _yawTorque: 100
+  _yawTorque: 250
   _pitchTorque: 200
   _rollTorque: 100
   _thrust: 500
   _upThrust: 500
   _strafeThrust: 300
-  miningTool: {fileID: 11400000, guid: 872fe82dfc1adba4ea0621acc4973a78, type: 2}
-  boost: {fileID: 11400000, guid: 60153f98d1ddbdd4f889358a7349db6d, type: 2}
+  mineTool: {fileID: 0}
+  boostObject: {fileID: 0}

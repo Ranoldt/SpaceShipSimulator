@@ -22,4 +22,8 @@ public class MainMenu : MonoBehaviour
         }
     }
 
+    public void OpenTutorial()
+    {
+        SceneManager.LoadScene("Tutorial");
+    }
 }
