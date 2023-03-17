@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2916667186325998710}
   m_Layer: 0
   m_Name: DebrisDrop
-  m_TagString: Untagged
+  m_TagString: Collects
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

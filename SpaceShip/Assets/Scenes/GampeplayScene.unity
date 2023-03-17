@@ -735,11 +735,56 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7625315258712350805, guid: b1ffc288ebc6c2f47bdc47277f13152d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7625315258712350805, guid: b1ffc288ebc6c2f47bdc47277f13152d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7625315258712350805, guid: b1ffc288ebc6c2f47bdc47277f13152d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7625315258712350805, guid: b1ffc288ebc6c2f47bdc47277f13152d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7625315258712350805, guid: b1ffc288ebc6c2f47bdc47277f13152d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7625315258712350805, guid: b1ffc288ebc6c2f47bdc47277f13152d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7625315258737556660, guid: b1ffc288ebc6c2f47bdc47277f13152d, type: 3}
       propertyPath: m_Name
       value: PlayerAI
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8711561568402000486, guid: b1ffc288ebc6c2f47bdc47277f13152d, type: 3}
+      propertyPath: Range
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8711561568402000486, guid: b1ffc288ebc6c2f47bdc47277f13152d, type: 3}
+      propertyPath: rotationalDamp
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8711561568402000486, guid: b1ffc288ebc6c2f47bdc47277f13152d, type: 3}
+      propertyPath: targets.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8711561568402000486, guid: b1ffc288ebc6c2f47bdc47277f13152d, type: 3}
+      propertyPath: targets.Array.data[0]
+      value: 
+      objectReference: {fileID: 6902249965210118477, guid: d520fd00554c84d48bc95b1a4c8103c1, type: 3}
+    - target: {fileID: 8711561568402000486, guid: b1ffc288ebc6c2f47bdc47277f13152d, type: 3}
+      propertyPath: targets.Array.data[1]
+      value: 
+      objectReference: {fileID: 4846248232645624269, guid: d18a5e4f7941d574b8dd07f4963efe8e, type: 3}
+    m_RemovedComponents:
+    - {fileID: 3701802996820213209, guid: b1ffc288ebc6c2f47bdc47277f13152d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b1ffc288ebc6c2f47bdc47277f13152d, type: 3}
 --- !u!1001 &7859941561528994124
 PrefabInstance:
