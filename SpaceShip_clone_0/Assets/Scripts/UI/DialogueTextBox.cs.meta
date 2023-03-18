@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:SpaceShip/Assets/Scripts/PlayerAI.cs.meta
+guid: 98b2aeb1b5e5fdb47992e374872f37de
+========
 guid: becd66f8d8b63e143aa2f2c69a299202
+>>>>>>>> f142feee84fd6e668a4a4d49cf6303bb7b716474:SpaceShip/Assets/Scripts/UI/DialogueTextBox.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
