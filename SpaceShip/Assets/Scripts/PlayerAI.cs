@@ -19,16 +19,26 @@ public class PlayerAI : MonoBehaviour
     int height = 1;
     [SerializeField]
     private LevelUp levels;
-    public List<LineRenderer> beams = new List<LineRenderer>();
-    private MineObjects tool { get { return GetComponent<SpaceShip>().inv.equippedMineTool; } }
+    [SerializeField]
+    private LineRenderer[] Lasers;
+    [SerializeField]
+    private Transform[] LaserOrigin;
+    private MineObjects tool { get { return GetComponent<MineObjects>(); } }
     public InventoryManager inv;
+    public InventorySlot instance;
 
-
+    bool canFire = true;
+    private float LaserOffTime = .5f;
+    private float fireDelay = 2f;
     Vector3 wayPoint;
 
     private float SightRange = 30;
     private float health;
+    [SerializeField]
+    private float power;
     RaycastHit hit;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,16 +49,22 @@ public class PlayerAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch(AIplayer)
+        switch (AIplayer)
         {
             case playerAI.wander:
-                Chase(wayPoint);
-                if ((transform.position - wayPoint).magnitude < 3)
-                    Wander();
-                if (HaveLineOfSight("Collects"))
-                    AIplayer = playerAI.collect;
+                
+                    Chase(wayPoint);
+                    if ((transform.position - wayPoint).magnitude < 3)
+                        Wander();
+
                 if (HaveLineOfSight("Asteroids"))
                     AIplayer = playerAI.mine;
+                if ((transform.position - targets[1].position).magnitude < 10 && (transform.position - targets[2].position).magnitude < 10)
+                    AIplayer = playerAI.attack;
+
+                if (inv.Container.Count > 0)
+                    AIplayer = playerAI.sell;
+
                 break;
             case playerAI.collect:
                 GameObject[] CollectTargets = GameObject.FindGameObjectsWithTag("Collects");
@@ -57,6 +73,7 @@ public class PlayerAI : MonoBehaviour
                     if (HaveLineOfSight("Collects") && InFront("Collects"))
                     {
                         Chase(CollectTargets[i].transform.position);
+                        inv.addItem(instance.item, instance.amount);
                         break;
                     }
                     else
@@ -66,11 +83,29 @@ public class PlayerAI : MonoBehaviour
             case playerAI.mine:
                 if (HaveLineOfSight("Asteroids") && InFront("Asteroids"))
                     Mine();
+                if (HaveLineOfSight("Collects"))
+                    AIplayer = playerAI.collect;
                 break;
             case playerAI.attack:
+                
+                float previousHealth = health;
+
+                if (health < previousHealth)
+                {
+                    Attack();
+                }
+                if ((transform.position-targets[1].position).magnitude > 30 && (transform.position - targets[2].position).magnitude > 30)
+                    AIplayer = playerAI.wander;
                 break;
             case playerAI.sell:
-                break;
+                int spaceLeft = (int)inv.InvSize - inv.Container.Count;
+                if (spaceLeft <= 0)
+                {
+                    Sell();
+                }
+                else
+                    AIplayer = playerAI.wander;
+                    break;
             case playerAI.die:
                 Destroy(this.gameObject);
                 break;
@@ -82,7 +117,7 @@ public class PlayerAI : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
-             AIplayer= playerAI.die;
+            AIplayer = playerAI.die;
         }
     }
 
@@ -106,7 +141,7 @@ public class PlayerAI : MonoBehaviour
     bool HaveLineOfSight(string tag)
     {
         GameObject[] targets = GameObject.FindGameObjectsWithTag(tag);
-        foreach(GameObject target in targets)
+        foreach (GameObject target in targets)
         {
             Vector3 direction = target.transform.position - transform.position;
 
@@ -123,10 +158,10 @@ public class PlayerAI : MonoBehaviour
 
     void Chase(Vector3 destination)
     {
-            Vector3 pos = destination - transform.position;
-            Quaternion rotation = Quaternion.LookRotation(pos);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationalDamp * Time.deltaTime);
-            transform.position += transform.forward * movementSpeed * Time.deltaTime;
+        Vector3 pos = destination - transform.position;
+        Quaternion rotation = Quaternion.LookRotation(pos);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationalDamp * Time.deltaTime);
+        transform.position += transform.forward * movementSpeed * Time.deltaTime;
     }
 
     void Wander()
@@ -137,29 +172,117 @@ public class PlayerAI : MonoBehaviour
 
     void Mine()
     {
-        RaycastHit Hitinfo;
-
-        if (TargetInfo.IsTargetInRange(Middle.position, Middle.forward, out Hitinfo, tool.laserRange, tool.shootingMask))
+        GameObject[] asteroids = GameObject.FindGameObjectsWithTag("Asteroids");
+        if (asteroids.Length > 0)
         {
-            Debug.Log("BRUH");
-            IShootable target = Hitinfo.transform.GetComponent<IShootable>();
-            if (target != null)
+            GameObject closestAsteroid = asteroids[0];
+            float closestDistance = Vector3.Distance(transform.position, closestAsteroid.transform.position);
+            foreach (GameObject asteroid in asteroids)
             {
-                target.damage(tool.miningPower + (1.5f * levels.minePowerLevel));//total power of laser
+                float distance = Vector3.Distance(transform.position, asteroid.transform.position);
+                if (distance < closestDistance)
+                {
+                    closestAsteroid = asteroid;
+                    closestDistance = distance;
+                }
             }
-            Instantiate(tool.laserHitParticles, Hitinfo.point, Quaternion.LookRotation(Hitinfo.normal));
 
-            foreach (var beam in beams)
+            Vector3 direction = closestAsteroid.transform.position - transform.position;
+            Quaternion rotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationalDamp * Time.deltaTime);
+
+            foreach (var laser in Lasers)
             {
-                Debug.Log("Beam work");
-                Vector3 localHitPosition = beam.transform.InverseTransformPoint(Hitinfo.point);
-                beam.gameObject.SetActive(true);
-                beam.SetPosition(1, localHitPosition);
+                RaycastHit hit;
+                if (Physics.Raycast(Middle.transform.position, Middle.transform.forward, out hit))
+                {
+                    if (hit.collider.gameObject.tag == "Asteroids" && hit.collider.gameObject == closestAsteroid)
+                    {
+                        Vector3 localHitPosition = laser.transform.InverseTransformPoint(hit.point);
+                        laser.SetPosition(1, localHitPosition);
+                        laser.gameObject.SetActive(true);
+                    }
+                }
+            }
+        }
+
+    }
+
+    void Attack()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject closestEnemy = null;
+        float closestDistance = Mathf.Infinity;
+
+        
+        foreach (GameObject enemy in enemies)
+        {
+            float distance = Vector3.Distance(transform.position, enemy.transform.position);
+            if (distance < closestDistance)
+            {
+                closestEnemy = enemy;
+                closestDistance = distance;
+            }
+        }
+
+        // Chase and attack the closest enemy if it exists and is within range
+        if (closestEnemy != null && closestDistance <= 30f)
+        {
+            Chase(closestEnemy.transform.position);
+            if (HaveLineOfSight("Enemy") && InFront("Enemy"))
+            {
+                foreach (var laser in Lasers)
+                {
+                    if (canFire)
+                    {
+                        {
+                            Vector3 localHitPosition = laser.transform.InverseTransformPoint(hit.point);
+                            laser.SetPosition(1, localHitPosition);
+                            laser.gameObject.SetActive(true);
+                            IShootable enemyDmg = closestEnemy.GetComponent<IShootable>();
+                            if (enemyDmg != null)
+                            {
+                                enemyDmg.damage(power);
+                            }
+                            canFire = false;
+                            Invoke("TurnOffLaser", LaserOffTime);
+                            Invoke("CanFire", fireDelay);
+                        }
+                    }
+                }
             }
         }
     }
-}
-public enum playerAI
+
+
+    void Sell()
+    {
+        Chase(targets[0].position);
+        for (int i = inv.Container.Count - 1; i >= 0; i--)
+        {
+            int stackPrice = inv.Container[i].item.SellAmount * inv.Container[i].amount;
+            inv.currentCash += stackPrice;
+            inv.Container.RemoveAt(i);
+
+            if (inv.Container.Count < inv.InvSize)
+            {
+                break;
+            }
+        }
+    }
+
+        void TurnOffLaser()
+        {
+            foreach (var laser in Lasers)
+                laser.gameObject.SetActive(false);
+        }
+
+        void CanFire()
+        {
+            canFire = true;
+        }
+    }
+    public enum playerAI
     {
         wander,
         attack,
@@ -169,5 +292,6 @@ public enum playerAI
         die
 
     }
+
   
 
