@@ -38,7 +38,7 @@ public class Fracture : MonoBehaviour, IShootable
             FractureObject();
         }
     }
-
+    
     private void CalculateDrops() //based on the info in the lootable list, calculate if the drops will happen, and how many to drop
     {
         for(int i = 0; i< AsteroidData.lootable.Length; i++)
@@ -70,6 +70,8 @@ public class Fracture : MonoBehaviour, IShootable
     public void FractureObject()
     {
         Instantiate(fractured, transform.position, transform.rotation); //Spawn in the broken version
-        Destroy(gameObject); //Destroy the object to stop it getting in the way
+        //Destroy(gameObject); //Destroy the object to stop it getting in the way
+        var sb = new SpawnerBehavior();
+        sb.asteroidPool.Release(this);
     }
 }
