@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 //RONALD
 
 public class TurretShipAI : MonoBehaviour, IShootable
@@ -26,11 +27,29 @@ public class TurretShipAI : MonoBehaviour, IShootable
 
     [SerializeField]
     private TurretShip turretShip = TurretShip.wander;
+
+    IObjectPool<GameObject> projPool;
+    [SerializeField]
+    private EnemyProjectile proj;
     // Start is called before the first frame update
     void Start()
     {
         Wander();
         health = 25;
+
+        projPool = new ObjectPool<GameObject>(() =>
+        {
+            return Instantiate(projectile);
+        }, projectile =>
+        {
+            projectile.gameObject.SetActive(true);
+        }, projectile =>
+        {
+            projectile.gameObject.SetActive(false);
+        }, projectile =>
+        {
+            Destroy(projectile.gameObject);
+        }, true, 15, 30);
     }
     private void OnEnable()
     {
@@ -96,10 +115,14 @@ public class TurretShipAI : MonoBehaviour, IShootable
         if (Time.time >= nextFire)
         {
             nextFire = Time.time + 1f / fireRate;
-            GameObject clone = Instantiate(projectile, barrel.position, Head.rotation);
+            //GameObject clone = Instantiate(projectile, barrel.position, Head.rotation);
+            GameObject clone = projPool.Get();
+            clone.transform.position = barrel.position;
+            clone.transform.rotation = Head.rotation;
             clone.transform.Rotate(90, 0, 0);
             clone.GetComponent<Rigidbody>().AddForce(Head.forward * 1000);
-            Destroy(clone, 10);
+            //Destroy(clone, 10);
+            StartCoroutine(ReturnToPool(clone));
         }
     }
 
@@ -109,4 +132,11 @@ public class TurretShipAI : MonoBehaviour, IShootable
         shoot,
         die
     }
+
+    IEnumerator ReturnToPool(GameObject _proj)
+    {
+        yield return new WaitForSeconds(10);
+        projPool.Release(_proj);
+    }
+    
 }
