@@ -13,7 +13,7 @@ using UnityEngine;
 /// </summary>
 public class PlayerManager : MonoBehaviour
 {
-    public int playerID;
+    public int playerID = 0;
 
     public float playerHealth;
     public float maxHealth;

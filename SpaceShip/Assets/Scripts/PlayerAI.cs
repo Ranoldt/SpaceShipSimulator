@@ -25,7 +25,7 @@ public class PlayerAI : MonoBehaviour
     private Transform[] LaserOrigin;
     private MineObjects tool { get { return GetComponent<MineObjects>(); } }
     public InventoryManager inv;
-    public InventorySlot instance;
+    //public InventorySlot instance;
 
     bool canFire = true;
     private float LaserOffTime = .5f;
@@ -59,8 +59,8 @@ public class PlayerAI : MonoBehaviour
 
                 if (HaveLineOfSight("Asteroids"))
                     AIplayer = playerAI.mine;
-                if ((transform.position - targets[1].position).magnitude < 10 && (transform.position - targets[2].position).magnitude < 10)
-                    AIplayer = playerAI.attack;
+                //if ((transform.position - targets[1].position).magnitude < 10 && (transform.position - targets[2].position).magnitude < 10)
+                    //AIplayer = playerAI.attack;
 
                 if (inv.Container.Count > 0)
                     AIplayer = playerAI.sell;
@@ -73,7 +73,7 @@ public class PlayerAI : MonoBehaviour
                     if (HaveLineOfSight("Collects") && InFront("Collects"))
                     {
                         Chase(CollectTargets[i].transform.position);
-                        inv.addItem(instance.item, instance.amount);
+                        //inv.addItem(instance.item, instance.amount);
                         break;
                     }
                     else

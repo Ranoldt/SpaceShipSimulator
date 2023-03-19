@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// Script responsible for leveling up the ship's attributes.
 /// </summary>
 public class LevelUp : MonoBehaviour
 {
+    [SerializeField]
+    private UnityEvent inventoryUpgradeResponse;
+
     [SerializeField]
     private InventoryManager inventory;
 
@@ -109,6 +113,7 @@ public class LevelUp : MonoBehaviour
             invCapacityCost = (int)Mathf.Round(invCapacityCost * 1.25f);
             MoneyChange.Raise();//update money UI by raising the event
             onUpgrade.Raise();
+            inventoryUpgradeResponse.Invoke(); //update inventory UI in shop and in field
         }
     }
 
