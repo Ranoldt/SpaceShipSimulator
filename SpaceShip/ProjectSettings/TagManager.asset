@@ -9,8 +9,6 @@ TagManager:
   - Enemy
   - ShootOrigin
   - Shop
-  - Asteroids
-  - Collects
   layers:
   - Default
   - TransparentFX
