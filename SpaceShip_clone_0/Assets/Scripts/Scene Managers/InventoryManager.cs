@@ -56,6 +56,10 @@ public class InventoryManager : MonoBehaviour
         {
             if (Container[i].item == _item && Container[i].amount < _item.MaxStack)
             {
+                //if adding an item is successful, play a sound
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.iPickSfx, this.transform.position);
+
+
                 Container[i].addAmount(_amount);
                 hasItem = true;
                 if (OnItemChangedCallback != null)
