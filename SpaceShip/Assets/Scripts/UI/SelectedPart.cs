@@ -12,6 +12,15 @@ public class SelectedPart : MonoBehaviour
     [SerializeField]
     private List<ShipPart> _componentList;
 
+    public TextMeshProUGUI shipType;
+    public TextMeshProUGUI toolType; 
+
+    public void Update()
+    {
+
+        shipType.text = shipComponent.name;
+    }
+
     private void Awake()
     {
         //set default values
