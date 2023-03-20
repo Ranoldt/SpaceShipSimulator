@@ -29,15 +29,14 @@ public class TurretShipAI : MonoBehaviour, IShootable
     private TurretShip turretShip = TurretShip.wander;
 
     IObjectPool<GameObject> projPool;
-    [SerializeField]
-    private EnemyProjectile proj;
+
     // Start is called before the first frame update
     void Start()
     {
         Wander();
         health = 25;
 
-        projPool = new ObjectPool<GameObject>(() =>
+        projPool = new ObjectPool<GameObject>(() => //Defines the functions of the Object Pool
         {
             return Instantiate(projectile);
         }, projectile =>
@@ -116,13 +115,13 @@ public class TurretShipAI : MonoBehaviour, IShootable
         {
             nextFire = Time.time + 1f / fireRate;
             //GameObject clone = Instantiate(projectile, barrel.position, Head.rotation);
-            GameObject clone = projPool.Get();
-            clone.transform.position = barrel.position;
+            GameObject clone = projPool.Get(); //Grabs projectile from the pool and sets it active
+            clone.transform.position = barrel.position; //Does what the Instantiate function did before
             clone.transform.rotation = Head.rotation;
             clone.transform.Rotate(90, 0, 0);
             clone.GetComponent<Rigidbody>().AddForce(Head.forward * 1000);
             //Destroy(clone, 10);
-            StartCoroutine(ReturnToPool(clone));
+            StartCoroutine(ReturnToPool(clone)); //Starts coroutine that waits for some time then returns projectile to the pool
         }
     }
 
@@ -135,7 +134,7 @@ public class TurretShipAI : MonoBehaviour, IShootable
 
     IEnumerator ReturnToPool(GameObject _proj)
     {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(7);
         projPool.Release(_proj);
     }
     
