@@ -15,15 +15,6 @@ using UnityEngine.Pool;
 
 public class MineToolFiring : MonoBehaviour
 {
-    [SerializeField]
-    private AudioSource sfxSource;
-
-    [SerializeField]
-    private AudioClip bulletSfx;
-
-    [SerializeField]
-    private AudioClip beamSfx;
-
     private MineObjects tool { get { return GetComponent<SpaceShip>().inv.equippedMineTool; } }
     private bool held = false;
 
@@ -160,6 +151,11 @@ public class MineToolFiring : MonoBehaviour
                 Instantiate(tool.fab, firePoint);
             }
             DecrementAmmo();
+
+            //play the sound effect
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.bulletSfx, this.transform.position);
+
+
             lastShootTime = Time.time;
         }
     }
