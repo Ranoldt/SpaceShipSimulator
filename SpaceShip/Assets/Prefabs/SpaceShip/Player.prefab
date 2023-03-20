@@ -1021,6 +1021,18 @@ PrefabInstance:
       propertyPath: levels
       value: 
       objectReference: {fileID: 1168332741891033664}
+    - target: {fileID: 1034399875, guid: d8d46c4d9fc75b846a7485d3b4bd1b47, type: 3}
+      propertyPath: shooters.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1034399875, guid: d8d46c4d9fc75b846a7485d3b4bd1b47, type: 3}
+      propertyPath: shooters.Array.data[0]
+      value: 
+      objectReference: {fileID: 1168332742007067740}
+    - target: {fileID: 1034399875, guid: d8d46c4d9fc75b846a7485d3b4bd1b47, type: 3}
+      propertyPath: shooters.Array.data[1]
+      value: 
+      objectReference: {fileID: 1168332740773648942}
     - target: {fileID: 6525150597279178117, guid: d8d46c4d9fc75b846a7485d3b4bd1b47, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -1371,6 +1383,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8d46c4d9fc75b846a7485d3b4bd1b47, type: 3}
+--- !u!4 &1168332740773648942 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6525150597279178122, guid: d8d46c4d9fc75b846a7485d3b4bd1b47, type: 3}
+  m_PrefabInstance: {fileID: 5384965491918194596}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1168332741012604104 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6525150597770281836, guid: d8d46c4d9fc75b846a7485d3b4bd1b47, type: 3}
@@ -1426,6 +1443,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a86c9f367a1350a4dbd9051f17797a03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1168332742007067740 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6525150598798463992, guid: d8d46c4d9fc75b846a7485d3b4bd1b47, type: 3}
+  m_PrefabInstance: {fileID: 5384965491918194596}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1168332742492724907 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6525150598981605647, guid: d8d46c4d9fc75b846a7485d3b4bd1b47, type: 3}

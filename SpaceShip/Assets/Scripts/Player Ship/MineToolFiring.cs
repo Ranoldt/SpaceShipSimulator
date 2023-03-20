@@ -8,20 +8,25 @@ using UnityEngine.InputSystem;
 /// > if Beam: raycast beam logic
 /// > if Bullet: projectile bullet logic
 /// </summary>
+/// 
+
+//Beam initialization method is in the LaserOrigin script.
 
 public class MineToolFiring : MonoBehaviour
 {
     private MineObjects tool { get { return GetComponent<SpaceShip>().inv.equippedMineTool; } }
     private bool held = false;
 
-    [HideInInspector] public Transform[] shooters;
-    //shooting points added here during initialization event
+    [SerializeField]
+    private Transform[] shooters;
+    //shooting points added here during initialization event for both beams and bullets
 
     [SerializeField]
     private Transform OriginMiddle;
 
     public List<LineRenderer> beams = new List<LineRenderer>();
     //beams added here during initialization event
+    //this list is iterated through whenever these beams are activated/ deactivated
 
     private float lastShootTime;
 

@@ -969,6 +969,10 @@ PrefabInstance:
       propertyPath: players.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 557364450264284844, guid: ce3905c05e1df7c4fb65e60be9f75276, type: 3}
+      propertyPath: _playerShips.Array.data[0].tool
+      value: 
+      objectReference: {fileID: 11400000, guid: 907919f2e37b13e44b5aba317d38b423, type: 2}
     - target: {fileID: 557364450264284845, guid: ce3905c05e1df7c4fb65e60be9f75276, type: 3}
       propertyPath: m_RootOrder
       value: 3
