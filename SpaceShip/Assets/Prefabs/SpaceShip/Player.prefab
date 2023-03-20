@@ -567,6 +567,7 @@ GameObject:
   - component: {fileID: 1554389212620823643}
   - component: {fileID: 3963541304924687579}
   - component: {fileID: 3129000928868312246}
+  - component: {fileID: 4452095109353106730}
   m_Layer: 9
   m_Name: MinimapIcon
   m_TagString: Untagged
@@ -581,9 +582,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8916013323096678342}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 3, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1168332742492724907}
@@ -653,6 +654,25 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1818360609 &4452095109353106730
+RotationConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916013323096678342}
+  m_Enabled: 1
+  m_Weight: 0
+  m_RotationAtRest: {x: 90, y: 0, z: 0}
+  m_RotationOffset: {x: 90, y: 0, z: 0}
+  m_AffectRotationX: 1
+  m_AffectRotationY: 1
+  m_AffectRotationZ: 1
+  m_IsContraintActive: 1
+  m_IsLocked: 0
+  m_Sources:
+  - sourceTransform: {fileID: 8044782327723311323}
+    weight: 1
 --- !u!1001 &326650219222077537
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1562,6 +1582,30 @@ MonoBehaviour:
   recoveryRate: 5
   deathEffect: {fileID: 139366, guid: b185c1a9cf067374586d095111b15bd1, type: 3}
   deathTimer: 3
+--- !u!1 &1168332741358962393 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6525150597898666365, guid: d8d46c4d9fc75b846a7485d3b4bd1b47, type: 3}
+  m_PrefabInstance: {fileID: 5384965491918194596}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1818360609 &4695403275342204028
+RotationConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1168332741358962393}
+  m_Enabled: 1
+  m_Weight: 0
+  m_RotationAtRest: {x: 90, y: 0, z: 0}
+  m_RotationOffset: {x: 90, y: 0, z: 0}
+  m_AffectRotationX: 1
+  m_AffectRotationY: 1
+  m_AffectRotationZ: 1
+  m_IsContraintActive: 1
+  m_IsLocked: 0
+  m_Sources:
+  - sourceTransform: {fileID: 8044782327723311323}
+    weight: 1
 --- !u!114 &1168332741891033664 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6525150598379785700, guid: d8d46c4d9fc75b846a7485d3b4bd1b47, type: 3}
