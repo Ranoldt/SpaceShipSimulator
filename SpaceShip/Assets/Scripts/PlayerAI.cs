@@ -5,12 +5,16 @@ using UnityEngine;
 public class PlayerAI : MonoBehaviour
 {
     public playerAI AIplayer;
+
+    private bool isReachWaypoint; //wander variable
+
+
     [SerializeField]
     Transform[] targets;
     [SerializeField]
     public float movementSpeed = 10f;
     [SerializeField]
-    public float rotationalDamp = 1f;
+    public float rotationalDamp;
     [SerializeField]
     private Transform Middle;
     [SerializeField]
@@ -22,7 +26,7 @@ public class PlayerAI : MonoBehaviour
     private LineRenderer[] Lasers;
     [SerializeField]
     private Transform[] LaserOrigin;
-    private MineObjects tool { get { return GetComponent<MineObjects>(); } }
+
     public InventoryManager inv;
     //public InventorySlot instance;
 
@@ -35,17 +39,19 @@ public class PlayerAI : MonoBehaviour
     Vector3 wayPoint;
 
     private float SightRange = 30;
-    private float health;
     [SerializeField]
     private float power;
     RaycastHit hit;
-   
+
+    GameObject[] CollectTargets;
 
     // Start is called before the first frame update
     void Start()
     {
-        Wander();
-        health = 100f;
+
+        wayPoint = new Vector3(Random.Range(transform.position.x - Range, transform.position.x + Range), Random.Range(transform.position.y - height, transform.position.y + height), Random.Range(transform.position.z - Range, transform.position.z + Range));
+
+        AIplayer = playerAI.wander;
 
         Collider[] Colliders = Physics.OverlapSphere(transform.position, sphereRadius);
         foreach (Collider collider in Colliders)
@@ -64,74 +70,95 @@ public class PlayerAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.frameCount % 10 == 0)
-        {
-            UpdateList();
-        }
+        Debug.Log(AIplayer);
+        UpdateList();
+
         switch (AIplayer)
         {
             case playerAI.wander:
-                
+                //wander logic
+                if (Vector3.Distance(this.transform.position, wayPoint) <= 0.5 || wayPoint == Vector3.zero)
+                {
+                    isReachWaypoint = true;
+                }
+
+                if(isReachWaypoint)
+                {
+                    wayPoint = new Vector3(Random.Range(transform.position.x - Range, transform.position.x + Range), Random.Range(transform.position.y - height, transform.position.y + height), Random.Range(transform.position.z - Range, transform.position.z + Range));
+                    transform.LookAt(wayPoint);
+                    isReachWaypoint = false;
                     Chase(wayPoint);
-                    if ((transform.position - wayPoint).magnitude < 3)
-                        Wander();
+                }
 
-                if (HaveLineOfSight("Asteroids"))
+                //wander transitions
+                if (mineableList.Count > 0)
+                {
+                    wayPoint = Vector3.zero;
                     AIplayer = playerAI.mine;
+                }
 
-                
-                foreach (GameObject enemy in enemiesList)
-                    if (Vector3.Distance(transform.position, enemy.transform.position) < 10)
-                        AIplayer = playerAI.attack;
+                if (enemiesList.Count != 0)
+                {
+                    foreach (GameObject enemy in enemiesList)
+                        if (Vector3.Distance(transform.position, enemy.transform.position) < 10)
+                        {
+                            wayPoint = Vector3.zero;
+                            AIplayer = playerAI.attack;
+                        }
+                }
 
                 if (inv.Container.Count > 0)
+                {
+                    wayPoint = Vector3.zero;
                     AIplayer = playerAI.sell;
+                }
 
                 break;
+
             case playerAI.collect:
-                GameObject[] CollectTargets = GameObject.FindGameObjectsWithTag("Collects");
-                for (int i = 0; i < CollectTargets.Length; i++)
+                //collect logic
+                transform.position += transform.forward * movementSpeed * Time.deltaTime;
+
+                if(!HaveLineOfSight("Collects"))
                 {
-                    if (HaveLineOfSight("Collects") && InFront("Collects"))
-                    {
-                        Chase(CollectTargets[i].transform.position);
-                        //inv.addItem(instance.item, instance.amount);
-                        break;
-                    }
-                    else
-                        AIplayer = playerAI.wander;
+                    AIplayer = playerAI.wander;
                 }
+
+
                 break;
+
+
             case playerAI.mine:
-                if (HaveLineOfSight("Asteroids") && InFront("Asteroids"))
                     Mine();
                 if (HaveLineOfSight("Collects"))
-                    AIplayer = playerAI.collect;
-                break;
-            case playerAI.attack:
-                
-                float previousHealth = health;
-
-                if (health < previousHealth)
                 {
-                    Attack();
+                    Invoke("TurnOffLaser", LaserOffTime);
+                    AIplayer = playerAI.collect;
                 }
+
+                else if(mineableList.Count == 0)
+                {
+                    AIplayer = playerAI.wander;
+                }
+                break;
+
+
+            case playerAI.attack:
+                    Attack();
+                
 
                 foreach (GameObject enemy in enemiesList)
                     if (Vector3.Distance(transform.position, enemy.transform.position) > 30)
                         AIplayer = playerAI.wander;
                 break;
+
             case playerAI.sell:
-                int spaceLeft = (int)inv.InvSize - inv.Container.Count;
-                if (spaceLeft <= 0)
-                {
                     Sell();
-                }
-                else
+
+                if(inv.Container.Count == 0)
                     AIplayer = playerAI.wander;
                     break;
             case playerAI.die:
-                Destroy(this.gameObject);
                 break;
         }
     }
@@ -152,14 +179,6 @@ public class PlayerAI : MonoBehaviour
             {
                 mineableList.Add(collider.gameObject);
             }
-        }
-    }
-    public void damage(float damage)
-    {
-        health -= damage;
-        if (health <= 0)
-        {
-            AIplayer = playerAI.die;
         }
     }
 
@@ -183,15 +202,18 @@ public class PlayerAI : MonoBehaviour
     bool HaveLineOfSight(string tag)
     {
         GameObject[] targets = GameObject.FindGameObjectsWithTag(tag);
-        foreach (GameObject target in targets)
+        if (targets.Length != 0)
         {
-            Vector3 direction = target.transform.position - transform.position;
-
-            if (Physics.Raycast(Middle.transform.position, direction, out hit, SightRange))
+            foreach (GameObject target in targets)
             {
-                if (hit.transform.CompareTag(tag))
+                Vector3 direction = target.transform.position - transform.position;
+
+                if (Physics.Raycast(Middle.transform.position, direction, out hit, SightRange))
                 {
-                    return true;
+                    if (hit.transform.CompareTag(tag))
+                    {
+                        return true;
+                    }
                 }
             }
         }
@@ -200,17 +222,14 @@ public class PlayerAI : MonoBehaviour
 
     void Chase(Vector3 destination)
     {
-        Vector3 pos = destination - transform.position;
-        Quaternion rotation = Quaternion.LookRotation(pos);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationalDamp * Time.deltaTime);
+        Vector3 pos = (destination - transform.position);
+        //Quaternion rotation = Quaternion.LookRotation(pos);
+        //transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationalDamp * Time.deltaTime);
+
+        transform.LookAt(destination);
         transform.position += transform.forward * movementSpeed * Time.deltaTime;
     }
 
-    void Wander()
-    {
-        wayPoint = new Vector3(Random.Range(transform.position.x - Range, transform.position.x + Range), Random.Range(transform.position.y - height, transform.position.y + height), Random.Range(transform.position.z - Range, transform.position.z + Range));
-        transform.LookAt(wayPoint);
-    }
 
     void Mine()
     {
@@ -223,10 +242,13 @@ public class PlayerAI : MonoBehaviour
                 float distance = Vector3.Distance(transform.position, asteroid.transform.position);
                 if (distance < closestDistance)
                 {
+
                     closestAsteroid = asteroid;
                     closestDistance = distance;
+
                 }
             }
+
 
             Vector3 direction = closestAsteroid.transform.position - transform.position;
             Quaternion rotation = Quaternion.LookRotation(direction);
@@ -237,6 +259,12 @@ public class PlayerAI : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(Middle.transform.position, Middle.transform.forward, out hit))
                 {
+                    IShootable target = hit.transform.GetComponent<IShootable>();
+
+                    if (target != null)
+                    {
+                        target.damage(power + (1.5f * levels.minePowerLevel));//total power of laser
+                    }
                     if (hit.collider.gameObject.CompareTag("Asteroids") && hit.collider.gameObject == closestAsteroid)
                     {
                         Vector3 localHitPosition = laser.transform.InverseTransformPoint(hit.point);
@@ -297,16 +325,21 @@ public class PlayerAI : MonoBehaviour
 
     void Sell()
     {
+        //Debug.Log("going to " + targets[0].position+ ", currently at " + transform.position);
         Chase(targets[0].position);
-        for (int i = inv.Container.Count - 1; i >= 0; i--)
-        {
-            int stackPrice = inv.Container[i].item.SellAmount * inv.Container[i].amount;
-            inv.currentCash += stackPrice;
-            inv.Container.RemoveAt(i);
 
-            if (inv.Container.Count < inv.InvSize)
+        if (Vector3.Distance(this.transform.position, targets[0].position) <= 5)
+        {
+            for (int i = inv.Container.Count - 1; i >= 0; i--)
             {
-                break;
+                int stackPrice = inv.Container[i].item.SellAmount * inv.Container[i].amount;
+                inv.currentCash += stackPrice;
+                inv.Container.RemoveAt(i);
+
+                if (inv.Container.Count < inv.InvSize)
+                {
+                    break;
+                }
             }
         }
     }

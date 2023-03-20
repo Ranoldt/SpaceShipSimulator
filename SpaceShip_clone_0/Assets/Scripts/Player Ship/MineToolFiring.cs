@@ -41,6 +41,8 @@ public class MineToolFiring : MonoBehaviour
     private LevelUp levels;
 
     IObjectPool<ParticleSystem> particlePool;
+    public IObjectPool<GameObject> bulletPool;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +56,7 @@ public class MineToolFiring : MonoBehaviour
         manager.ammoLeft = manager.ammoCapacity;
 
         ParticleSystem particle = tool.laserHitParticles;
+        GameObject bullet = tool.fab;
 
         particlePool = new ObjectPool<ParticleSystem>(() => //Defines the functions of the Object Pool
         {
@@ -68,6 +71,20 @@ public class MineToolFiring : MonoBehaviour
         {
             Destroy(particle.gameObject);
         }, true, 40, 100);
+
+        bulletPool = new ObjectPool<GameObject>(() => //Defines the functions of the Object Pool
+        {
+            return Instantiate(bullet);
+        }, bullet =>
+        {
+            bullet.gameObject.SetActive(true);
+        }, bullet =>
+        {
+            bullet.gameObject.SetActive(false);
+        }, bullet =>
+        {
+            Destroy(bullet.gameObject);
+        }, true, 10, 20);
     }
 
     void Update()
@@ -148,7 +165,10 @@ public class MineToolFiring : MonoBehaviour
         {
             foreach (var firePoint in shooters)
             {
-                Instantiate(tool.fab, firePoint);
+                //Instantiate(tool.fab, firePoint);
+                GameObject bllt = bulletPool.Get();
+                bllt.transform.position = firePoint.position;
+                bllt.transform.rotation = firePoint.rotation;
             }
             DecrementAmmo();
 

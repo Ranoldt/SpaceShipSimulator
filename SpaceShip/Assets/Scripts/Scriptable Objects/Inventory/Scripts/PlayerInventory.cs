@@ -10,11 +10,10 @@ public class PlayerInventory : MonoBehaviour
     /// This script is only responsible for adding new items in the inventory on collision with an item object.
     /// </summary>
 
-    private InventoryManager inventory;
+    [SerializeField]private InventoryManager inventory;
 
     private void Start()
     {
-        inventory = GetComponent<SpaceShip>().inv;
 
         //initialize the player's component inventories
         inventory.miningToolContainer.Add(inventory.equippedMineTool);
@@ -35,6 +34,8 @@ public class PlayerInventory : MonoBehaviour
             var doAdd = inventory.addItem(item.item, 1);
             if (doAdd)
             {
+                //if adding an item is successful, play a sound
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.iPickSfx, this.transform.position);
                 other.GetComponent<Collider>().enabled = false; //deal with double counting by making sure on trigger enter only happens once
                 Destroy(other.gameObject);
             }

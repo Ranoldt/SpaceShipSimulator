@@ -56,8 +56,6 @@ public class InventoryManager : MonoBehaviour
         {
             if (Container[i].item == _item && Container[i].amount < _item.MaxStack)
             {
-                //if adding an item is successful, play a sound
-                AudioManager.instance.PlayOneShot(FMODEvents.instance.iPickSfx, this.transform.position);
 
 
                 Container[i].addAmount(_amount);
@@ -86,7 +84,6 @@ public class InventoryManager : MonoBehaviour
         {
             if (Container[i].selected)
             {
-                Debug.Log("selling"+ Container[i].item.name);
                 int stackPrice = Container[i].item.SellAmount * Container[i].amount;
                 currentCash += stackPrice;
                 Container.RemoveAt(i);
