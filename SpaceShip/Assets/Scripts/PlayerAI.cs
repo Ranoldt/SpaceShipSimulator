@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PlayerAI : MonoBehaviour
 {
-    [SerializeField]
-    private playerAI AIplayer;
+    public playerAI AIplayer;
     [SerializeField]
     Transform[] targets;
     [SerializeField]
@@ -28,8 +27,8 @@ public class PlayerAI : MonoBehaviour
     //public InventorySlot instance;
 
     private float sphereRadius = 30f;
-    private List<GameObject> enemiesList = new List<GameObject>();
-    private List<GameObject> mineableList = new List<GameObject>();
+    [SerializeField]private List<GameObject> enemiesList = new List<GameObject>();
+    [SerializeField]private List<GameObject> mineableList = new List<GameObject>();
     bool canFire = true;
     private float LaserOffTime = .5f;
     private float fireDelay = 2f;
