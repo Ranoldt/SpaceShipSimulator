@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6814085452417466835}
   - component: {fileID: 5489573102246653369}
   - component: {fileID: 1894475357340865359}
+  - component: {fileID: 5059151649406699985}
   m_Layer: 9
   m_Name: MinimapIcon
   m_TagString: Untagged
@@ -98,6 +99,25 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1818360609 &5059151649406699985
+RotationConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506326685670549098}
+  m_Enabled: 1
+  m_Weight: 0
+  m_RotationAtRest: {x: 90, y: 0, z: 0}
+  m_RotationOffset: {x: 90, y: 0, z: 0}
+  m_AffectRotationX: 1
+  m_AffectRotationY: 1
+  m_AffectRotationZ: 1
+  m_IsContraintActive: 1
+  m_IsLocked: 0
+  m_Sources:
+  - sourceTransform: {fileID: 8044782327723311323, guid: e475cdceaf2ac564b83815f2d1c88080, type: 3}
+    weight: 1
 --- !u!1 &7131879691495988418
 GameObject:
   m_ObjectHideFlags: 0
