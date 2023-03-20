@@ -70,27 +70,23 @@ public class PlayerAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(AIplayer);
         UpdateList();
 
         switch (AIplayer)
         {
             case playerAI.wander:
                 //wander logic
+
+                Chase(wayPoint);
+                
+
                 if (Vector3.Distance(this.transform.position, wayPoint) <= 0.5 || wayPoint == Vector3.zero)
                 {
-                    isReachWaypoint = true;
-                }
-
-                if(isReachWaypoint)
-                {
                     wayPoint = new Vector3(Random.Range(transform.position.x - Range, transform.position.x + Range), Random.Range(transform.position.y - height, transform.position.y + height), Random.Range(transform.position.z - Range, transform.position.z + Range));
-                    transform.LookAt(wayPoint);
-                    isReachWaypoint = false;
-                    Chase(wayPoint);
                 }
 
                 //wander transitions
+
                 if (mineableList.Count > 0)
                 {
                     wayPoint = Vector3.zero;
