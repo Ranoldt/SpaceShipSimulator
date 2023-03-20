@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Pool;
 
 /// <summary>
 /// Checks a weapon scriptable object's Enum Type to see which behavior to apply
@@ -14,6 +15,15 @@ using UnityEngine.InputSystem;
 
 public class MineToolFiring : MonoBehaviour
 {
+    [SerializeField]
+    private AudioSource sfxSource;
+
+    [SerializeField]
+    private AudioClip bulletSfx;
+
+    [SerializeField]
+    private AudioClip beamSfx;
+
     private MineObjects tool { get { return GetComponent<SpaceShip>().inv.equippedMineTool; } }
     private bool held = false;
 
@@ -39,6 +49,7 @@ public class MineToolFiring : MonoBehaviour
     [SerializeField]
     private LevelUp levels;
 
+    IObjectPool<ParticleSystem> particlePool;
     // Start is called before the first frame update
     void Start()
     {
@@ -50,6 +61,22 @@ public class MineToolFiring : MonoBehaviour
 
         manager.ammoCapacity = ammoConfig.defaultCapacity;
         manager.ammoLeft = manager.ammoCapacity;
+
+        ParticleSystem particle = tool.laserHitParticles;
+
+        particlePool = new ObjectPool<ParticleSystem>(() => //Defines the functions of the Object Pool
+        {
+            return Instantiate(particle);
+        }, particle =>
+        {
+            particle.gameObject.SetActive(true);
+        }, particle =>
+        {
+            particle.gameObject.SetActive(false);
+        }, particle =>
+        {
+            Destroy(particle.gameObject);
+        }, true, 40, 100);
     }
 
     void Update()
@@ -67,7 +94,7 @@ public class MineToolFiring : MonoBehaviour
         }
         else if(tool.mineType == mineToolType.bullet)
         {
-            if (held)
+            if (held && canFire)
             {
                 BulletFire();
             }
@@ -84,11 +111,19 @@ public class MineToolFiring : MonoBehaviour
         if (TargetInfo.IsTargetInRange(OriginMiddle.position, OriginMiddle.forward, out Hitinfo, tool.laserRange, tool.shootingMask))
         {
             IShootable target = Hitinfo.transform.GetComponent<IShootable>();
+
             if (target != null)
             {
                 target.damage(tool.miningPower + (1.5f* levels.minePowerLevel));//total power of laser
             }
-            Instantiate(tool.laserHitParticles, Hitinfo.point, Quaternion.LookRotation(Hitinfo.normal));
+            //Instantiate(tool.laserHitParticles, Hitinfo.point, Quaternion.LookRotation(Hitinfo.normal));
+            
+            ParticleSystem particles = particlePool.Get();
+            particles.transform.position = Hitinfo.point;
+            particles.transform.rotation = Quaternion.LookRotation(Hitinfo.normal);
+            StartCoroutine(ReturnParticles(particles));
+            
+            
 
             foreach (var beam in beams)
             {
@@ -124,6 +159,7 @@ public class MineToolFiring : MonoBehaviour
             {
                 Instantiate(tool.fab, firePoint);
             }
+            DecrementAmmo();
             lastShootTime = Time.time;
         }
     }
@@ -174,5 +210,11 @@ public class MineToolFiring : MonoBehaviour
             held = true;
         if (ctx.canceled)
             held = false;
+    }
+
+    IEnumerator ReturnParticles(ParticleSystem ps)
+    {
+        yield return new WaitForSeconds(1);
+        particlePool.Release(ps);
     }
 }

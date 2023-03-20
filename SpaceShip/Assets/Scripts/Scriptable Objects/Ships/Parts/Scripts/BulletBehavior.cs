@@ -14,11 +14,12 @@ public class BulletBehavior : MonoBehaviour
     private Rigidbody rb;
 
     private float minePower;
-    [SerializeField]
-    private FloatVariable laserLevel;
 
-    private void Start()
+    private LevelUp levels;
+
+    private void Awake()
     {
+        levels = gameObject.transform.root.GetComponentInChildren<LevelUp>();
         rb = this.GetComponent<Rigidbody>();
         minePower = GetComponentInParent<SpaceShip>().inv.equippedMineTool.miningPower;
     }
@@ -44,7 +45,7 @@ public class BulletBehavior : MonoBehaviour
 
         if(target != null)
         {
-            target.damage(minePower * (1.5f * laserLevel.FloatValue));
+            target.damage(minePower + (1.5f * levels.minePowerLevel));
             Destroy(this.gameObject);
         }
     }

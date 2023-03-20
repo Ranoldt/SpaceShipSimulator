@@ -9,13 +9,32 @@ using UnityEngine.Events;
 public class LevelUp : MonoBehaviour
 {
     [SerializeField]
-    private UnityEvent inventoryUpgradeResponse;
+    private UnityEvent inventoryUpgradeResponse;//calls the inventory ui to create a new visual slot
 
     [SerializeField]
     private InventoryManager inventory;
 
     [SerializeField]
     private PlayerManager player;
+
+
+    //multipliers for each upgrade cost
+    [SerializeField]
+    private float minePowerFactor;
+
+    [SerializeField]
+    private float mineAmmoFactor;
+
+    [SerializeField]
+    private float boostPowerFactor;
+
+    [SerializeField]
+    private float boostAmmoFactor;
+
+    [SerializeField]
+    private float inventoryFactor;
+
+
 
     //cost variables
     public int minePowerCost { get; private set;}
@@ -58,7 +77,7 @@ public class LevelUp : MonoBehaviour
         {
             inventory.currentCash -= minePowerCost;
             minePowerLevel+= 1;
-            minePowerCost = (int)Mathf.Round(minePowerCost * 1.5f);
+            minePowerCost = (int)Mathf.Round(minePowerCost * minePowerFactor);
             MoneyChange.Raise();//update money UI by raising the event
             onUpgrade.Raise();
         }
@@ -70,7 +89,7 @@ public class LevelUp : MonoBehaviour
         {
             inventory.currentCash -= mineAmmoCost;
             mineAmmoLevel += 1;
-            mineAmmoCost = (int)Mathf.Round(mineAmmoCost * 1.5f);
+            mineAmmoCost = (int)Mathf.Round(mineAmmoCost * mineAmmoFactor);
             player.ammoCapacity += (5 * mineAmmoLevel);
             player.ammoLeft = player.ammoCapacity;
             MoneyChange.Raise();//update money UI by raising the event
@@ -84,7 +103,7 @@ public class LevelUp : MonoBehaviour
         {
             inventory.currentCash -= boostPowerCost;
             boostPowerLevel += 1;
-            boostPowerCost = (int)Mathf.Round(boostPowerCost * 1.5f);
+            boostPowerCost = (int)Mathf.Round(boostPowerCost * boostPowerFactor);
             MoneyChange.Raise();//update money UI by raising the event
             onUpgrade.Raise();
         }
@@ -96,7 +115,7 @@ public class LevelUp : MonoBehaviour
         {
             inventory.currentCash -= boostCapacityCost;
             boostCapacityLevel += 1;
-            boostCapacityCost = (int)Mathf.Round(boostCapacityCost * 1.5f);
+            boostCapacityCost = (int)Mathf.Round(boostCapacityCost * boostAmmoFactor);
             player.boostCapacity += (5 * boostCapacityLevel);
             player.boostLeft = player.boostCapacity;
             MoneyChange.Raise();//update money UI by raising the event
@@ -110,7 +129,7 @@ public class LevelUp : MonoBehaviour
         {
             inventory.currentCash -= invCapacityCost;
             inventory.InvSize += 1;
-            invCapacityCost = (int)Mathf.Round(invCapacityCost * 1.25f);
+            invCapacityCost = (int)Mathf.Round(invCapacityCost * inventoryFactor);
             MoneyChange.Raise();//update money UI by raising the event
             onUpgrade.Raise();
             inventoryUpgradeResponse.Invoke(); //update inventory UI in shop and in field

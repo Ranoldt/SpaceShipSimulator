@@ -20,6 +20,6 @@ MonoBehaviour:
     m_Bits: 64
   _laserRange: 100
   _laserHitParticles: {fileID: 3897070527687402240, guid: 1bf4fc6a1da5fa34a9f9f39f368cff84, type: 3}
-  _miningPower: 3
+  _miningPower: 25
   _powerLevelCapacity: 4
   mineType: 1

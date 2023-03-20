@@ -16,3 +16,4 @@ MonoBehaviour:
   _regenRate: 0.1
   _regenInterval: 1
   _ammoUsedPerShot: 2
+  _shootingInterval: 0.5

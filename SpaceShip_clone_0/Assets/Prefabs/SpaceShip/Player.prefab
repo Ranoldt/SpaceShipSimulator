@@ -1022,6 +1022,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1168332741891033664}
     - target: {fileID: 1034399875, guid: d8d46c4d9fc75b846a7485d3b4bd1b47, type: 3}
+      propertyPath: beamSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: c049bc3783a62b04cb7856c91fba9115, type: 3}
+    - target: {fileID: 1034399875, guid: d8d46c4d9fc75b846a7485d3b4bd1b47, type: 3}
+      propertyPath: bulletSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: 64b7d1de626764f4689defecf19f4515, type: 3}
+    - target: {fileID: 1034399875, guid: d8d46c4d9fc75b846a7485d3b4bd1b47, type: 3}
+      propertyPath: sfxSource
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1034399875, guid: d8d46c4d9fc75b846a7485d3b4bd1b47, type: 3}
       propertyPath: shooters.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -1101,6 +1113,26 @@ PrefabInstance:
       propertyPath: onUpgrade
       value: 
       objectReference: {fileID: 11400000, guid: 07307389ada04234fb26352e7213f61a, type: 2}
+    - target: {fileID: 6525150598379785700, guid: d8d46c4d9fc75b846a7485d3b4bd1b47, type: 3}
+      propertyPath: mineAmmoFactor
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6525150598379785700, guid: d8d46c4d9fc75b846a7485d3b4bd1b47, type: 3}
+      propertyPath: boostAmmoFactor
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6525150598379785700, guid: d8d46c4d9fc75b846a7485d3b4bd1b47, type: 3}
+      propertyPath: inventoryFactor
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6525150598379785700, guid: d8d46c4d9fc75b846a7485d3b4bd1b47, type: 3}
+      propertyPath: minePowerFactor
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6525150598379785700, guid: d8d46c4d9fc75b846a7485d3b4bd1b47, type: 3}
+      propertyPath: boostPowerFactor
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6525150598379785700, guid: d8d46c4d9fc75b846a7485d3b4bd1b47, type: 3}
       propertyPath: inventoryUpgradeResponse.m_PersistentCalls.m_Calls.Array.size
       value: 2
