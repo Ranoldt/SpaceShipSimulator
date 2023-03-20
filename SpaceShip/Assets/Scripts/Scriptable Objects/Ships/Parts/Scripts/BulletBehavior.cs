@@ -17,11 +17,14 @@ public class BulletBehavior : MonoBehaviour
 
     private LevelUp levels;
 
+    private MineToolFiring mtf;
+
     private void Awake()
     {
         levels = gameObject.transform.root.GetComponentInChildren<LevelUp>();
         rb = this.GetComponent<Rigidbody>();
         minePower = GetComponentInParent<SpaceShip>().inv.equippedMineTool.miningPower;
+        MineToolFiring mtf = new MineToolFiring(); 
     }
 
     private void Update()
@@ -29,7 +32,8 @@ public class BulletBehavior : MonoBehaviour
         //destroy the bullet if it lives for too long to make sure you don't overload performance
         if(timeAlive >= life)
         {
-            Destroy(this.gameObject);
+            mtf.bulletPool.Release(this.gameObject);
+            //Destroy(this.gameObject);
         }
     }
     private void FixedUpdate()
@@ -46,7 +50,8 @@ public class BulletBehavior : MonoBehaviour
         if(target != null)
         {
             target.damage(minePower + (1.5f * levels.minePowerLevel));
-            Destroy(this.gameObject);
+            mtf.bulletPool.Release(this.gameObject);
+            //Destroy(this.gameObject);
         }
     }
 }
