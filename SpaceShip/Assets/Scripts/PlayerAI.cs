@@ -27,6 +27,9 @@ public class PlayerAI : MonoBehaviour
     public InventoryManager inv;
     //public InventorySlot instance;
 
+    private float sphereRadius = 30f;
+    private List<GameObject> enemiesList = new List<GameObject>();
+    private List<GameObject> mineableList = new List<GameObject>();
     bool canFire = true;
     private float LaserOffTime = .5f;
     private float fireDelay = 2f;
@@ -37,18 +40,35 @@ public class PlayerAI : MonoBehaviour
     [SerializeField]
     private float power;
     RaycastHit hit;
-
+   
 
     // Start is called before the first frame update
     void Start()
     {
         Wander();
         health = 100f;
+
+        Collider[] Colliders = Physics.OverlapSphere(transform.position, sphereRadius);
+        foreach (Collider collider in Colliders)
+        {
+            if (collider.CompareTag("Enemy"))
+            {
+                enemiesList.Add(collider.gameObject);
+            }
+            else if (collider.CompareTag("Asteroids"))
+            {
+                mineableList.Add(collider.gameObject);
+            }
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Time.frameCount % 10 == 0)
+        {
+            UpdateList();
+        }
         switch (AIplayer)
         {
             case playerAI.wander:
@@ -59,8 +79,11 @@ public class PlayerAI : MonoBehaviour
 
                 if (HaveLineOfSight("Asteroids"))
                     AIplayer = playerAI.mine;
-                //if ((transform.position - targets[1].position).magnitude < 10 && (transform.position - targets[2].position).magnitude < 10)
-                    //AIplayer = playerAI.attack;
+
+                
+                foreach (GameObject enemy in enemiesList)
+                    if (Vector3.Distance(transform.position, enemy.transform.position) < 10)
+                        AIplayer = playerAI.attack;
 
                 if (inv.Container.Count > 0)
                     AIplayer = playerAI.sell;
@@ -94,8 +117,10 @@ public class PlayerAI : MonoBehaviour
                 {
                     Attack();
                 }
-                if ((transform.position-targets[1].position).magnitude > 30 && (transform.position - targets[2].position).magnitude > 30)
-                    AIplayer = playerAI.wander;
+
+                foreach (GameObject enemy in enemiesList)
+                    if (Vector3.Distance(transform.position, enemy.transform.position) > 30)
+                        AIplayer = playerAI.wander;
                 break;
             case playerAI.sell:
                 int spaceLeft = (int)inv.InvSize - inv.Container.Count;
@@ -112,6 +137,24 @@ public class PlayerAI : MonoBehaviour
         }
     }
 
+    void UpdateList()
+    {
+        enemiesList.Clear();
+        mineableList.Clear();
+
+        Collider[] Colliders = Physics.OverlapSphere(transform.position, sphereRadius);
+        foreach (Collider collider in Colliders)
+        {
+            if (collider.CompareTag("Enemy"))
+            {
+                enemiesList.Add(collider.gameObject);
+            }
+            else if (collider.CompareTag("Asteroids"))
+            {
+                mineableList.Add(collider.gameObject);
+            }
+        }
+    }
     public void damage(float damage)
     {
         health -= damage;
@@ -172,12 +215,11 @@ public class PlayerAI : MonoBehaviour
 
     void Mine()
     {
-        GameObject[] asteroids = GameObject.FindGameObjectsWithTag("Asteroids");
-        if (asteroids.Length > 0)
+        if (mineableList.Count > 0)
         {
-            GameObject closestAsteroid = asteroids[0];
+            GameObject closestAsteroid = mineableList[0];
             float closestDistance = Vector3.Distance(transform.position, closestAsteroid.transform.position);
-            foreach (GameObject asteroid in asteroids)
+            foreach (GameObject asteroid in mineableList)
             {
                 float distance = Vector3.Distance(transform.position, asteroid.transform.position);
                 if (distance < closestDistance)
@@ -196,7 +238,7 @@ public class PlayerAI : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(Middle.transform.position, Middle.transform.forward, out hit))
                 {
-                    if (hit.collider.gameObject.tag == "Asteroids" && hit.collider.gameObject == closestAsteroid)
+                    if (hit.collider.gameObject.CompareTag("Asteroids") && hit.collider.gameObject == closestAsteroid)
                     {
                         Vector3 localHitPosition = laser.transform.InverseTransformPoint(hit.point);
                         laser.SetPosition(1, localHitPosition);
@@ -210,12 +252,11 @@ public class PlayerAI : MonoBehaviour
 
     void Attack()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         GameObject closestEnemy = null;
         float closestDistance = Mathf.Infinity;
 
         
-        foreach (GameObject enemy in enemies)
+        foreach (GameObject enemy in enemiesList)
         {
             float distance = Vector3.Distance(transform.position, enemy.transform.position);
             if (distance < closestDistance)

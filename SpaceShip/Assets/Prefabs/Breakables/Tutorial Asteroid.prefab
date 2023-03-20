@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 5352827752101682985}
   m_Layer: 6
   m_Name: Tutorial Asteroid
-  m_TagString: Untagged
+  m_TagString: Asteroids
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
